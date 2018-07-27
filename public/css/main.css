@@ -1,0 +1,15 @@
+body
+{
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background: black;
+}
+
+#gameCanvas
+{
+	position: absolute;
+    left: 0px;
+    top: 0px;
+	z-index: -1;
+}

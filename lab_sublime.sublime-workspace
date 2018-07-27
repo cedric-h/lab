@@ -1,0 +1,691 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "systems/loadEnemies.js",
+			"settings":
+			{
+				"buffer_size": 2616,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "systems/flightpath.js",
+			"settings":
+			{
+				"buffer_size": 1808,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "systems/combat.js",
+			"settings":
+			{
+				"buffer_size": 1762,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "components/attackable.js",
+			"settings":
+			{
+				"buffer_size": 176,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "systems/loadModels.js",
+			"settings":
+			{
+				"buffer_size": 1074,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 71.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"\t\td\t",
+				"Discord Rich Presence: Reconnect to Discord"
+			],
+			[
+				"discord",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"Discor",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"Disco",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"Discord",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"discod",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"theme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"discr",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"disc",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"discord\t\t",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			]
+		],
+		"width": 428.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/projects/lab",
+		"/C/projects/lab/components",
+		"/C/projects/lab/systems"
+	],
+	"file_history":
+	[
+		"/C/projects/lab/systems/flightpath.js",
+		"/C/projects/lab/components/box.js",
+		"/C/projects/lab/systems/loadEnemies.js",
+		"/C/projects/lab/systems/broadcastMovement.js",
+		"/C/projects/lab/public/js/systems/renderModels.js",
+		"/C/projects/lab/systems/loadModels.js",
+		"/C/projects/TPSexperimental/TPSmanagePlayers.js",
+		"/C/projects/lab/public/js/systems/health.js",
+		"/C/projects/lab/public/js/components/health.js",
+		"/C/projects/lab/systems/combat.js",
+		"/C/projects/lab/public/js/systems/weaponControls.js",
+		"/C/projects/lab/components/flightpath.js",
+		"/C/projects/lab/server.js",
+		"/C/projects/lab/public/assets/scenes/testRoom.json",
+		"/C/projects/lab/public/js/systems/entitySpawning.js",
+		"/C/projects/lab/systems/movePlayer.js",
+		"/C/projects/lab/systems/moveEnemies.js",
+		"/C/projects/lab/systems/health.js",
+		"/C/projects/lab/public/js/systems/velocity.js",
+		"/C/projects/lab/components/combat.js",
+		"/C/projects/lab/node_modules/fs-extra/lib/copy/copy.js",
+		"/C/projects/lab/public/js/systems/interpolateMovement.js",
+		"/C/projects/lab/systems/loginPlayer.js",
+		"/C/projects/lab/public/js/login.js",
+		"/C/projects/lab/systems/enemyMovement.js",
+		"/C/projects/lab/gamedata/enemies.json",
+		"/C/projects/lab/public/js/lib/ecs/entity-pool.js",
+		"/C/projects/lab/public/js/systems/movementAnimation.js",
+		"/C/projects/lab/public/js/util/closestEntity.js",
+		"/C/projects/lab/public/js/components/model.js",
+		"/C/projects/lab/public/js/components/movementControls.js",
+		"/C/projects/lab/public/js/components/targetable.js",
+		"/C/projects/lab/public/js/components/targeted.js",
+		"/C/projects/TPSexperimental/node_modules/npm/scripts/release.sh",
+		"/C/projects/lab/public/js/util/closestModel.js",
+		"/C/projects/TPSexperimental/node_modules/npm/scripts/clean-old.sh",
+		"/C/projects/lab/public/js/components/targetingControls.js",
+		"/C/projects/lab/components/ai.js",
+		"/C/projects/lab/public/assets/models/angryBoi.json",
+		"/C/projects/lab/systems/loadPlayer.js",
+		"/C/projects/lab/components/attackable.js",
+		"/C/projects/lab/systems/projectile.js",
+		"/C/projects/lab/components/projectile.js",
+		"/C/projects/lab/systems/enemies.js",
+		"/C/projects/lab/systems/enemies.jss",
+		"/C/projects/lab/public/js/components/velocityParameters.js",
+		"/C/projects/lab/public/js/systems/collidable.js",
+		"/C/projects/lab/public/js/components/collidable.js",
+		"/C/projects/lab/public/js/systems/movementControls.js",
+		"/C/projects/lab/public/js/systems/cameraControls.js",
+		"/C/projects/lab/public/js/systems/hitbox.js",
+		"/C/projects/lab/public/js/components/hitbox.js",
+		"/C/Users/cedhu/Downloads/scene.json",
+		"/C/projects/lab/public/assets/scenes/testRoomNoCollision.json",
+		"/C/projects/lab/public/js/systems/collideable.js",
+		"/C/projects/lab/public/js/systems/movementUpdate.js",
+		"/C/projects/lab/public/js/websocketsWrapperClient.js",
+		"/C/projects/lab/public/scenes/testRoom.json",
+		"/C/projects/lab/public/js/components/collision.js",
+		"/C/projects/lab/public/js/components/clientCollisionPrediction.js",
+		"/C/projects/lab/public/js/components/projectile.js",
+		"/C/projects/lab/public/js/components/cameraControls.js",
+		"/C/projects/lab/public/js/components/movement.js",
+		"/C/projects/lab/public/js/components/animation.js",
+		"/C/projects/lab/public/js/components/velocity.js",
+		"/C/projects/lab/public/js/systems/shooting.js",
+		"/C/projects/lab/public/js/systems/shootingControls.js",
+		"/C/projects/lab/public/models/player.json",
+		"/C/projects/lab/public/js/components/shooting.js",
+		"/C/projects/lab/public/js/loadECS.js",
+		"/C/projects/lab/components/client.js",
+		"/C/projects/lab/components/model.js",
+		"/C/projects/lab/broadcast.js",
+		"/C/projects/bromine/TPS/TPSgame.js",
+		"/C/projects/lab/public/js/systems/manageOtherPlayers.js",
+		"/C/projects/lab/public/js/components/serverId.js",
+		"/C/Users/cedhu/Downloads/Robot_run.blend",
+		"/C/projects/lab/public/models/bow.json",
+		"/C/projects/lab/systems/load.js",
+		"/C/projects/lab/systems/netget.js",
+		"/C/projects/lab/netget.js",
+		"/C/projects/lab/public/js/components/serverId",
+		"/C/projects/TPSexperimental/node_modules/npm/configure",
+		"/C/projects/lab/public/js/systems/rotationAnimation.js",
+		"/C/projects/lab/public/js/components/rotationAnimation.js",
+		"/C/Users/cedhu/Downloads/Two.js_ Dynamic Text.html",
+		"/C/projects/TPSexperimental/public/js/3Drendering.js",
+		"/C/projects/sandwichSandbox/scripts/main.js",
+		"/C/projects/lab/node_modules/three/build/three.js",
+		"/C/projects/lab/public/js/lib/three.js",
+		"/C/projects/lab/public/js/lib/threeExtra/Gyroscope.js",
+		"/C/projects/lab/ECSbus.js",
+		"/C/projects/lab/public/js/lib/ecs/object-pool.js",
+		"/C/projects/lab/public/js/components/mouseCameraRotation.js",
+		"/C/projects/listBot/undefined",
+		"/C/projects/listBot/recordedLists.json",
+		"/C/projects/listBot/bot.js",
+		"/C/projects/lab/public/js/components/movementController.js",
+		"/C/projects/lab/public/js/components/position.js",
+		"/C/projects/lab/public/js/lib/ecs/entity-component-system.js",
+		"/C/Users/cedhu/Downloads/present-1.0.0/present-1.0.0/present.js",
+		"/C/projects/lab/public/js/lib/present.js",
+		"/C/projects/lab/public/js/lib/ecs/index.js",
+		"/C/projects/lab/public/js/load.js",
+		"/C/projects/lab/node_modules/entity-component-system/lib/object-pool.js",
+		"/C/projects/lab/node_modules/entity-component-system/lib/entity-pool.js",
+		"/C/projects/lab/node_modules/entity-component-system/lib/entity-component-system.js",
+		"/C/projects/lab/loadECS.js",
+		"/C/projects/lab/public/js/require.js",
+		"/C/projects/lab/host.js",
+		"/C/projects/lab/wsWrapperServer.js",
+		"/C/projects/lab/paranoia.js",
+		"/C/projects/lab/package.json",
+		"/C/Users/cedhu/Desktop/search.js",
+		"/C/projects/lab/systems/sender.js",
+		"/C/projects/lab/componentSystemPairs/client.js",
+		"/C/projects/lab/public/index.html",
+		"/C/projects/lab/public/css/main.css",
+		"/C/projects/TPSexperimental/TPS.js",
+		"/C/projects/lab/nodemon.json",
+		"/C/Users/cedhu/Downloads/Stencil Files/Stencil Files/TAP files ready for Bones/2 inch/2 in RTS.tap",
+		"/C/projects/TPSexperimental/public/meshes/player.json",
+		"/C/projects/TPSexperimental/TPSterrain.js",
+		"/C/projects/TPSexperimental/.clocignore",
+		"/C/projects/TPSexperimental/server.js",
+		"/C/projects/TPSexperimental/public/js/main.js",
+		"/C/projects/TPSexperimental/public/js/playerManagement.js",
+		"/C/projects/TPSexperimental/public/index.html"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"z",
+			"6",
+			"Width",
+			"center",
+			"'",
+			"targetId",
+			"meshLocation",
+			"ObjectLoader",
+			"collisionMaps",
+			"mapLoadingPromises",
+			"travelTimeTotal",
+			"flightpath.travelTime",
+			"repeat",
+			"map",
+			"offset",
+			"quaternion",
+			"model",
+			"amp",
+			"amplitude",
+			"flightpath",
+			"velocity",
+			"addComponent",
+			"arrowModel",
+			"combat",
+			"client",
+			"clients",
+			"client",
+			"addCompon",
+			"addComponet",
+			"model",
+			"ringMesh",
+			"Model",
+			"{\n",
+			"ringEntity",
+			"deplete",
+			"model",
+			"models",
+			"nearestPlayer",
+			"models",
+			"closestModel",
+			"closestTarget.model",
+			"model",
+			"influenceIndex",
+			"model",
+			"context",
+			",",
+			"200",
+			"model",
+			"entities",
+			"player",
+			"playerEntity",
+			"\t",
+			"entity",
+			"positions",
+			"0",
+			"mbient",
+			"op",
+			"color",
+			"a",
+			"color",
+			"colorAmbi",
+			"lambert",
+			"v",
+			"L",
+			"Lambert",
+			"otherPlayer",
+			"entity",
+			"newEntity",
+			"Player",
+			"models",
+			"entities",
+			"playerEntity",
+			"playerJoin",
+			"entityWithId",
+			"enemyEntity",
+			"model",
+			"entities",
+			",",
+			":",
+			"u",
+			"u\\",
+			"u",
+			"enemy",
+			"enemyData",
+			"u",
+			"newEnemy",
+			"1000",
+			"metal",
+			"Me",
+			"Metal_",
+			"geometry",
+			"playerEntity",
+			"camRayCaster",
+			"let",
+			"moveControls",
+			"/*",
+			"scale.",
+			"hitbox.",
+			"2",
+			"1",
+			"velocityParameters",
+			"hitbox",
+			"velocity",
+			"model",
+			"clone",
+			"'",
+			"model",
+			"scenes",
+			"\"intensity\":0.1",
+			"0.1",
+			"repeat",
+			"model",
+			"//",
+			"collisions[0]",
+			"velocityParameters",
+			"moveControls",
+			"velocity",
+			"movement",
+			"didCollide",
+			"hitbox",
+			"moveControls",
+			"collision",
+			"rays",
+			"centerPosition",
+			"centerObject",
+			"center",
+			"add",
+			"center"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "systems/loadEnemies.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2616,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1773,
+								1773
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1610.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "systems/flightpath.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1808,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								829,
+								829
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 260.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "systems/combat.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1247,
+								1247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 456.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "components/attackable.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 176,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "systems/loadModels.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1074,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								750,
+								750
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 44.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 132.0
+	},
+	"pinned_build_system": "",
+	"project": "lab_sublime.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"game",
+				"public\\js\\game.js"
+			],
+			[
+				"3d",
+				"public\\js\\3Drendering.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\projects\\jlabsAutomate\\this.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": false,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}
