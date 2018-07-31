@@ -73,10 +73,18 @@ define(['../lib/three.js'], function(THREE)
 								(geometry, materials) =>
 								{
 									//load an animated mesh
-									if(geometry.skinWeights.length > 0)
+									if(geometry.bones && geometry.bones.length > 0)
 									{
 										//configure the material for animation
-										materials.forEach(material => material.skinning = true);
+										if(materials)
+										{
+											if(materials.length)
+												materials.forEach(material => material.skinning = true);
+
+											else
+												materials.skinning = true;
+										}
+
 										//put it all together and assign it
 										baseMeshes[name] = new THREE.SkinnedMesh(geometry, materials);
 									}
@@ -110,7 +118,9 @@ define(['../lib/three.js'], function(THREE)
 		}),
 		update: (allEntities, elapsedTime) =>
 		{
-			//and finally, render.
+			entities.emitter.emit('prerender');
+			
+			//render.
 			renderer.render(scene, camera);
 		}
 	}

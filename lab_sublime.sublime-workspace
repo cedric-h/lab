@@ -8,19 +8,108 @@
 	"buffers":
 	[
 		{
-			"file": "systems/loadEnemies.js",
+			"file": "public/js/login.js",
 			"settings":
 			{
-				"buffer_size": 2616,
+				"buffer_size": 3892,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "systems/flightpath.js",
+			"file": "public/gamedata/weaponPositionAdjustments.json",
 			"settings":
 			{
-				"buffer_size": 1808,
+				"buffer_size": 240,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/weaponAnimation.js",
+			"settings":
+			{
+				"buffer_size": 5045,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/weaponControls.js",
+			"settings":
+			{
+				"buffer_size": 1280,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/weaponModels.js",
+			"settings":
+			{
+				"buffer_size": 1437,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/weaponStats.js",
+			"settings":
+			{
+				"buffer_size": 1877,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/components/weapon.js",
+			"settings":
+			{
+				"buffer_size": 604,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/renderModels.js",
+			"settings":
+			{
+				"buffer_size": 3254,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/gamedata/weapons.json",
+			"settings":
+			{
+				"buffer_size": 68,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/movementAnimation.js",
+			"settings":
+			{
+				"buffer_size": 1571,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/movementUpdate.js",
+			"settings":
+			{
+				"buffer_size": 3160,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/movementControls.js",
+			"settings":
+			{
+				"buffer_size": 7232,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -29,24 +118,43 @@
 			"file": "systems/combat.js",
 			"settings":
 			{
-				"buffer_size": 1762,
+				"buffer_size": 5190,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "components/attackable.js",
+			"file": "public/js/systems/health.js",
 			"settings":
 			{
-				"buffer_size": 176,
+				"buffer_size": 4729,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "systems/loadModels.js",
+			"file": "public/js/systems/entitySpawning.js",
 			"settings":
 			{
-				"buffer_size": 1074,
+				"buffer_size": 3284,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/systems/animation.js",
+			"settings":
+			{
+				"buffer_size": 610,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/js/components/animation.js",
+			"settings":
+			{
+				"buffer_size": 227,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -64,12 +172,20 @@
 		"selected_items":
 		[
 			[
-				"\t\td\t",
-				"Discord Rich Presence: Reconnect to Discord"
+				"disco",
+				"Discord Rich Presence: Disconnect"
 			],
 			[
 				"discord",
-				"Discord Rich Presence: Connect to Discord"
+				"Discord Rich Presence: Reconnect to Discord"
+			],
+			[
+				"discord\t",
+				"Discord Rich Presence: Disconnect"
+			],
+			[
+				"\t\td\t",
+				"Discord Rich Presence: Reconnect to Discord"
 			],
 			[
 				"Discor",
@@ -141,41 +257,72 @@
 	"expanded_folders":
 	[
 		"/C/projects/lab",
-		"/C/projects/lab/components",
+		"/C/projects/lab/public",
+		"/C/projects/lab/public/js",
+		"/C/projects/lab/public/js/systems",
 		"/C/projects/lab/systems"
 	],
 	"file_history":
 	[
-		"/C/projects/lab/systems/flightpath.js",
-		"/C/projects/lab/components/box.js",
-		"/C/projects/lab/systems/loadEnemies.js",
-		"/C/projects/lab/systems/broadcastMovement.js",
+		"/C/projects/lab/public/assets/models/angryBoi.json",
+		"/C/Users/cedhu/Downloads/HauntFall1.2.1-20180730T182205Z-001/HauntFall1.2.1/HauntFall1.2.1.py",
+		"/C/projects/lab/public/js/systems/movementUpdate.js",
 		"/C/projects/lab/public/js/systems/renderModels.js",
-		"/C/projects/lab/systems/loadModels.js",
-		"/C/projects/TPSexperimental/TPSmanagePlayers.js",
+		"/C/projects/lab/public/js/systems/movementControls.js",
+		"/C/projects/lab/public/js/systems/weaponStats.js",
+		"/C/projects/lab/public/js/components/dependents.js",
+		"/C/projects/lab/systems/combat.js",
+		"/C/projects/lab/public/js/login.js",
+		"/C/projects/lab/public/js/systems/dependents.js",
+		"/C/projects/lab/systems/loadEnemies.js",
+		"/C/projects/lab/public/js/systems/entitySpawning.js",
+		"/C/projects/lab/public/js/systems/addArm.js",
+		"/C/projects/lab/public/js/systems/animation.js",
+		"/C/projects/lab/public/js/systems/movementAnimation.js",
+		"/C/projects/lab/public/js/systems/weaponAnimation.js",
+		"/C/projects/lab/public/js/systems/weaponControls.js",
+		"/C/projects/lab/server.js",
+		"/C/projects/lab/public/assets/models/angryBoiArm.json",
+		"/C/projects/lab/public/js/systems/weaponModels.js",
+		"/C/projects/lab/public/gamedata/weapons.json",
+		"/C/projects/lab/public/js/components/weapon.js",
+		"/C/projects/lab/gamedata/enemies.json",
+		"/C/projects/lab/node_modules/three/build/three.js",
+		"/C/projects/lab/gamedata/weapons.json",
+		"/C/projects/lab/systems/loadPlayer.js",
+		"/C/projects/lab/public/js/systems/collidable.js",
+		"/C/projects/lab/systems/health.js",
 		"/C/projects/lab/public/js/systems/health.js",
 		"/C/projects/lab/public/js/components/health.js",
-		"/C/projects/lab/systems/combat.js",
-		"/C/projects/lab/public/js/systems/weaponControls.js",
+		"/C/projects/lab/public/js/systems/cameraControls.js",
+		"/C/projects/lab/.gitignore",
+		"/C/projects/lab/public/js/components/animation.js",
+		"/C/projects/lab/components/combat.js",
+		"/C/projects/lab/public/js/systems/shooting.js",
 		"/C/projects/lab/components/flightpath.js",
-		"/C/projects/lab/server.js",
+		"/C/projects/lab/public/js/components/shooting.js",
+		"/C/projects/lab/systems/flightpath.js",
+		"/C/projects/lab/public/js/components/movement.js",
+		"/C/projects/lab/systems/loadModels.js",
+		"/C/projects/lab/public/js/lib/ecs/entity-pool.js",
+		"/C/projects/lab/public/js/components/model.js",
+		"/C/projects/lab/public/js/components/modelName.js",
+		"/C/projects/lab/public/js/systems/interpolateMovement.js",
+		"/C/projects/lab/public/js/systems/hitbox.js",
+		"/C/projects/lab/public/js/systems/animations.js",
+		"/C/projects/lab/public/js/websocketsWrapperClient.js",
+		"/C/projects/lab/public/js/lib/threeExtra/SceneUtils.js",
+		"/C/projects/lab/components/box.js",
+		"/C/projects/lab/systems/broadcastMovement.js",
+		"/C/projects/TPSexperimental/TPSmanagePlayers.js",
 		"/C/projects/lab/public/assets/scenes/testRoom.json",
-		"/C/projects/lab/public/js/systems/entitySpawning.js",
 		"/C/projects/lab/systems/movePlayer.js",
 		"/C/projects/lab/systems/moveEnemies.js",
-		"/C/projects/lab/systems/health.js",
 		"/C/projects/lab/public/js/systems/velocity.js",
-		"/C/projects/lab/components/combat.js",
 		"/C/projects/lab/node_modules/fs-extra/lib/copy/copy.js",
-		"/C/projects/lab/public/js/systems/interpolateMovement.js",
 		"/C/projects/lab/systems/loginPlayer.js",
-		"/C/projects/lab/public/js/login.js",
 		"/C/projects/lab/systems/enemyMovement.js",
-		"/C/projects/lab/gamedata/enemies.json",
-		"/C/projects/lab/public/js/lib/ecs/entity-pool.js",
-		"/C/projects/lab/public/js/systems/movementAnimation.js",
 		"/C/projects/lab/public/js/util/closestEntity.js",
-		"/C/projects/lab/public/js/components/model.js",
 		"/C/projects/lab/public/js/components/movementControls.js",
 		"/C/projects/lab/public/js/components/targetable.js",
 		"/C/projects/lab/public/js/components/targeted.js",
@@ -184,37 +331,25 @@
 		"/C/projects/TPSexperimental/node_modules/npm/scripts/clean-old.sh",
 		"/C/projects/lab/public/js/components/targetingControls.js",
 		"/C/projects/lab/components/ai.js",
-		"/C/projects/lab/public/assets/models/angryBoi.json",
-		"/C/projects/lab/systems/loadPlayer.js",
 		"/C/projects/lab/components/attackable.js",
 		"/C/projects/lab/systems/projectile.js",
 		"/C/projects/lab/components/projectile.js",
 		"/C/projects/lab/systems/enemies.js",
 		"/C/projects/lab/systems/enemies.jss",
 		"/C/projects/lab/public/js/components/velocityParameters.js",
-		"/C/projects/lab/public/js/systems/collidable.js",
 		"/C/projects/lab/public/js/components/collidable.js",
-		"/C/projects/lab/public/js/systems/movementControls.js",
-		"/C/projects/lab/public/js/systems/cameraControls.js",
-		"/C/projects/lab/public/js/systems/hitbox.js",
 		"/C/projects/lab/public/js/components/hitbox.js",
 		"/C/Users/cedhu/Downloads/scene.json",
 		"/C/projects/lab/public/assets/scenes/testRoomNoCollision.json",
 		"/C/projects/lab/public/js/systems/collideable.js",
-		"/C/projects/lab/public/js/systems/movementUpdate.js",
-		"/C/projects/lab/public/js/websocketsWrapperClient.js",
 		"/C/projects/lab/public/scenes/testRoom.json",
 		"/C/projects/lab/public/js/components/collision.js",
 		"/C/projects/lab/public/js/components/clientCollisionPrediction.js",
 		"/C/projects/lab/public/js/components/projectile.js",
 		"/C/projects/lab/public/js/components/cameraControls.js",
-		"/C/projects/lab/public/js/components/movement.js",
-		"/C/projects/lab/public/js/components/animation.js",
 		"/C/projects/lab/public/js/components/velocity.js",
-		"/C/projects/lab/public/js/systems/shooting.js",
 		"/C/projects/lab/public/js/systems/shootingControls.js",
 		"/C/projects/lab/public/models/player.json",
-		"/C/projects/lab/public/js/components/shooting.js",
 		"/C/projects/lab/public/js/loadECS.js",
 		"/C/projects/lab/components/client.js",
 		"/C/projects/lab/components/model.js",
@@ -234,7 +369,6 @@
 		"/C/Users/cedhu/Downloads/Two.js_ Dynamic Text.html",
 		"/C/projects/TPSexperimental/public/js/3Drendering.js",
 		"/C/projects/sandwichSandbox/scripts/main.js",
-		"/C/projects/lab/node_modules/three/build/three.js",
 		"/C/projects/lab/public/js/lib/three.js",
 		"/C/projects/lab/public/js/lib/threeExtra/Gyroscope.js",
 		"/C/projects/lab/ECSbus.js",
@@ -257,23 +391,7 @@
 		"/C/projects/lab/public/js/require.js",
 		"/C/projects/lab/host.js",
 		"/C/projects/lab/wsWrapperServer.js",
-		"/C/projects/lab/paranoia.js",
-		"/C/projects/lab/package.json",
-		"/C/Users/cedhu/Desktop/search.js",
-		"/C/projects/lab/systems/sender.js",
-		"/C/projects/lab/componentSystemPairs/client.js",
-		"/C/projects/lab/public/index.html",
-		"/C/projects/lab/public/css/main.css",
-		"/C/projects/TPSexperimental/TPS.js",
-		"/C/projects/lab/nodemon.json",
-		"/C/Users/cedhu/Downloads/Stencil Files/Stencil Files/TAP files ready for Bones/2 inch/2 in RTS.tap",
-		"/C/projects/TPSexperimental/public/meshes/player.json",
-		"/C/projects/TPSexperimental/TPSterrain.js",
-		"/C/projects/TPSexperimental/.clocignore",
-		"/C/projects/TPSexperimental/server.js",
-		"/C/projects/TPSexperimental/public/js/main.js",
-		"/C/projects/TPSexperimental/public/js/playerManagement.js",
-		"/C/projects/TPSexperimental/public/index.html"
+		"/C/projects/lab/paranoia.js"
 	],
 	"find":
 	{
@@ -291,6 +409,98 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"combat.readied",
+			"animation.walking",
+			"movementControls",
+			"x",
+			"adjustment.",
+			"wielders",
+			"wielder",
+			"weaponModel",
+			"weapon",
+			"here",
+			"updateKeyMap",
+			"shootClip",
+			"shooting",
+			"weaponAnimation",
+			"shooting",
+			"player",
+			"playerModel",
+			"shootingAnimation",
+			"shooting",
+			"\t\t\t\n",
+			"Teir",
+			"dependents",
+			"y",
+			"entity",
+			"modelName",
+			"weapon",
+			"ModelName",
+			"dependents",
+			"Club",
+			"club",
+			"wielderDependents",
+			"walking",
+			"animation",
+			"ModelName",
+			"animation",
+			"arm",
+			"});",
+			"lookAt:",
+			"lookAt",
+			"model",
+			"wielderModel.skeleton",
+			"weapon",
+			"\"",
+			"playerModel",
+			"weapon",
+			"ObjectLoader",
+			"shooting",
+			"mapLoadingPromises",
+			"ecsFolders",
+			"meshDirectory",
+			"ecsDirectories",
+			":",
+			"type",
+			"folder",
+			" ",
+			"folderName",
+			"weapons",
+			"collisionMaps",
+			"scenes",
+			"models",
+			"weapons",
+			"models",
+			"collisionMaps",
+			"fast",
+			"willDestroy",
+			"duration",
+			"length",
+			"duration",
+			"png",
+			"clubTexture",
+			"getInPosition",
+			"mesh",
+			"entity",
+			"Remove",
+			"armDownTimeout",
+			"movement",
+			"console.log",
+			"bowUpWaitTime",
+			"animation",
+			"ModelAssigned",
+			"\\",
+			"ModelAssigned",
+			"modelAssign",
+			"position",
+			"reset",
+			"model",
+			"parentModel",
+			"childModel",
+			"model",
+			"parentModel",
+			"childModel",
+			"parent",
 			"z",
 			"6",
 			"Width",
@@ -326,99 +536,7 @@
 			"{\n",
 			"ringEntity",
 			"deplete",
-			"model",
-			"models",
-			"nearestPlayer",
-			"models",
-			"closestModel",
-			"closestTarget.model",
-			"model",
-			"influenceIndex",
-			"model",
-			"context",
-			",",
-			"200",
-			"model",
-			"entities",
-			"player",
-			"playerEntity",
-			"\t",
-			"entity",
-			"positions",
-			"0",
-			"mbient",
-			"op",
-			"color",
-			"a",
-			"color",
-			"colorAmbi",
-			"lambert",
-			"v",
-			"L",
-			"Lambert",
-			"otherPlayer",
-			"entity",
-			"newEntity",
-			"Player",
-			"models",
-			"entities",
-			"playerEntity",
-			"playerJoin",
-			"entityWithId",
-			"enemyEntity",
-			"model",
-			"entities",
-			",",
-			":",
-			"u",
-			"u\\",
-			"u",
-			"enemy",
-			"enemyData",
-			"u",
-			"newEnemy",
-			"1000",
-			"metal",
-			"Me",
-			"Metal_",
-			"geometry",
-			"playerEntity",
-			"camRayCaster",
-			"let",
-			"moveControls",
-			"/*",
-			"scale.",
-			"hitbox.",
-			"2",
-			"1",
-			"velocityParameters",
-			"hitbox",
-			"velocity",
-			"model",
-			"clone",
-			"'",
-			"model",
-			"scenes",
-			"\"intensity\":0.1",
-			"0.1",
-			"repeat",
-			"model",
-			"//",
-			"collisions[0]",
-			"velocityParameters",
-			"moveControls",
-			"velocity",
-			"movement",
-			"didCollide",
-			"hitbox",
-			"moveControls",
-			"collision",
-			"rays",
-			"centerPosition",
-			"centerObject",
-			"center",
-			"add",
-			"center"
+			"model"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -436,84 +554,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 12,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "systems/loadEnemies.js",
+					"file": "public/js/login.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2616,
+						"buffer_size": 3892,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1773,
-								1773
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1610.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "systems/flightpath.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1808,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								829,
-								829
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 260.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "systems/combat.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1762,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1247,
-								1247
+								3049,
+								3049
 							]
 						],
 						"settings":
@@ -522,7 +580,64 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 456.0,
+						"translation.y": 1300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/gamedata/weaponPositionAdjustments.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 240,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								236,
+								236
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/js/systems/weaponAnimation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5045,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1651,
+								1651
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1556.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -530,19 +645,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "components/attackable.js",
-					"semi_transient": true,
+					"file": "public/js/systems/weaponControls.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 176,
+						"buffer_size": 1280,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								454,
+								454
 							]
 						],
 						"settings":
@@ -554,24 +669,314 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "systems/loadModels.js",
+					"file": "public/js/systems/weaponModels.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1074,
+						"buffer_size": 1437,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								750,
-								750
+								354,
+								354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/js/systems/weaponStats.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1877,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								853,
+								853
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 140.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/js/components/weapon.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								383,
+								383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/js/systems/renderModels.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3254,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3195,
+								3195
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1820.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/gamedata/weapons.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 68,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								63,
+								63
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "public/js/systems/movementAnimation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1571,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1418,
+								1377
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 430.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "public/js/systems/movementUpdate.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 673.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/js/systems/movementControls.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5640,
+								5640
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3023.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "systems/combat.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3436,
+								3436
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2316.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "public/js/systems/health.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2488,
+								2488
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1380.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "public/js/systems/entitySpawning.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3284,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1562,
+								1562
 							]
 						],
 						"settings":
@@ -581,10 +986,68 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 280.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "public/js/systems/animation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								279,
+								279
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "public/js/components/animation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 227,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
 					"type": "text"
 				}
 			]
@@ -683,7 +1146,7 @@
 	"show_open_files": true,
 	"show_tabs": false,
 	"side_bar_visible": true,
-	"side_bar_width": 235.0,
+	"side_bar_width": 206.0,
 	"status_bar_visible": false,
 	"template_settings":
 	{

@@ -90,8 +90,13 @@ define(['../lib/three.js'], function(THREE)
 	//or data about max health; just the current value for one entity.
 	server.on('healthUpdate', data =>
 	{
-		let health = entities.getComponent(entityWithId(data.serverId), "health");
-		health.val = data.val;
+		let entity = entityWithId(data.serverId);
+
+		if(entity)
+		{
+			let health = entities.getComponent(entity, "health");
+			health.val = data.val;
+		}
 	});
 
 

@@ -5,6 +5,7 @@
 
 
 	var exportObject = {
+		serverAndClient: true,
 		load: new Promise((resolve, reject) =>
 		{
 			resolve();
@@ -12,11 +13,15 @@
 		factory: () =>
 		{
 			return {
-				shouldShoot: 		false,
-				shouldStop: 		false,
-				isUp: 				false,
-				isMoving: 			false,
-				weaponModel: 		'bow',
+				name: 			undefined,
+				model: 			undefined,
+				animation: 		undefined,
+				shouldShoot: 	false,
+				shouldStop: 	false,
+				isUp: 			false,
+				isMoving: 		false,
+				adjustments: 	{},
+				targetPosition: new THREE.Vector3()
 			}
 		}
 	}

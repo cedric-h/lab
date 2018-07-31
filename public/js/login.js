@@ -19,7 +19,7 @@ requirejs(['js/websocketsWrapperClient.js', '/js/lib/ecs/index.js', "/js/lib/thr
 	function getECSfiles()
 	{
 		server.emit('loadingECS');
-		server.once('ecsDirectories', (directories) => //names of the files in the folders to load
+		server.once('ecsFiles', (directories) => //names of the files in the folders to load
 		{
 			//put all of the modules to load in one array
 			let ECSfileNames = [].concat.apply([], Object.values(directories));
@@ -70,7 +70,7 @@ requirejs(['js/websocketsWrapperClient.js', '/js/lib/ecs/index.js', "/js/lib/thr
 	{
 		//management of the local player entity
 		//this should be done with an assemblage so that you don't have to
-		//go back to this script just to i.e. add a component to the player
+		//go back to this script just to add a component to the player
 		let localPlayer = entities.create();
 		//appearance
 	    entities.addComponent(localPlayer, "model");
@@ -82,9 +82,12 @@ requirejs(['js/websocketsWrapperClient.js', '/js/lib/ecs/index.js', "/js/lib/thr
 	    entities.addComponent(localPlayer, "cameraControls");
 	    entities.addComponent(localPlayer, "movementControls");
 	    entities.addComponent(localPlayer, "velocityParameters");
+	    entities.addComponent(localPlayer, "weapon");
 	    //mechanics
-	    entities.addComponent(localPlayer, "shooting");
 	    entities.addComponent(localPlayer, "health");
+
+	    entities.getComponent(localPlayer, "weapon").name = "bow";
+	    entities.emitter.emit('weaponEquip', localPlayer);
 
 
 	    //map

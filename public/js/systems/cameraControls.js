@@ -86,7 +86,8 @@ define(['../lib/three.js'], function(THREE)
 			camController.rotations.x = camController.rotations.x + event.movementX * camController.sensitivity.x;
 			camController.rotations.y = (incrementedY < Math.PI && incrementedY > 0) ? incrementedY : camController.rotations.y;
 
-			updatePosition(mouseControlledEntity);
+			//no need to update it after changing it if its updated every frame now.
+			//updatePosition(mouseControlledEntity);
 		}
 	}
 

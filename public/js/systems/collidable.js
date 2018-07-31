@@ -39,7 +39,7 @@ define(['../lib/three.js'], function(THREE)
 				});
 
 				Promise.all(mapLoadingPromises).then(resolve);
-			})
+			});
 		}), 
 		update: (entity, delta) => {}
 	}

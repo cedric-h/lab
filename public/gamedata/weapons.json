@@ -1,0 +1,8 @@
+{
+	"club": {
+		"type": "melee"
+	},
+	"bow": {
+		"type": "ranged"
+	}
+}

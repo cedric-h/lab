@@ -9,7 +9,8 @@ define(['../lib/three.js'], (THREE) =>
 		{
 			return {
 				mixer: undefined,
-				initialized: false
+				initialized: false,
+				active: true
 			}
 		}
 	}

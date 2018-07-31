@@ -7,9 +7,9 @@ let entities = ECSbus.entities;
 const fs = require('fs-extra');
 
 
-//get the things they'll later load
-var ecsDirectories;
-var meshDirectory = [];
+//make space for the things they'll later load
+const ecsFiles    = {};
+const meshLocations = [];
 
 
 //listening for a new player to join so you can give them stuff to load
@@ -22,15 +22,13 @@ entities.emitter.on('clientCreate', clientEntity =>
 
     //then just tell the client where stuff is so that they can load it.
     client.on('loadingECS', () =>
-    {
-        client.send('ecsDirectories', ecsDirectories);
-    });
+        client.send('ecsFiles', ecsFiles)
+    );
 
+    //tell the player where the models they need to load are
     client.on('loading', () =>
-    {
-        //tell the player where the models they need to load are
-        client.send('meshLocations', meshDirectory);
-    });
+        client.send('meshLocations', meshLocations)
+    );
 })
 
 
@@ -40,27 +38,34 @@ module.exports = {
 	load: new Promise((resolve, reject) =>
 	{
         //get the names of the files that the clients will need to load.
-        ecsDirectories = {
-            'components':   fs.readdirSync('./public/js/components').map(x => './js/components/' + x),
-            'systems':      fs.readdirSync('./public/js/systems').map(x => './js/systems/' + x)
-        };
+        ecsFiles.components = fs.readdirSync('./public/js/components').map(x => './js/components/' + x);
+        ecsFiles.systems    = fs.readdirSync('./public/js/systems'   ).map(x => './js/systems/'    + x);
 
-        //load the meshDirectories
-        [].concat(
-            fs.readdirSync('./public/assets/models/').map(x => './assets/models/' + x),
-            fs.readdirSync('./public/assets/scenes/').map(x => './assets/scenes/' + x),
-            fs.readdirSync('./public/assets/collisionMaps/').map(x => './assets/collisionMaps/' + x)
-        ).forEach(fileName => 
-        {
-            let splitName = fileName.split('.');
 
-            //if the file extension is .json, it needs to be loaded.
-            //the names of the external files the models use are included in those jsons,
-            //so no need to worry about those.
-            if(splitName[splitName.length - 1] === "json")
-                meshDirectory.push(splitName.splice(0, splitName.length - 1).join('.'))
-        });
+        //grab the relevant file paths for the 3D models
+        meshLocations.push(...[
+            ].concat(...[            //names of the folders to scan
+                    'models',
+                    'scenes',
+                    'collisionMaps',
+                    'weapons'
+                ].map(folder =>
+                    fs.readdirSync(  //get the names of the files inside of those folders
+                        './public/assets/' + folder + '/'
+                    ).map(x =>       //turn those into filepaths relative to the client directory
+                        './assets/' + folder + '/' + x
+                    )
+                )
+            ).map(fileName =>        //split
+                fileName.split('.')
+            ).filter(parts =>        //filter out the assets that aren't .jsons, because
+                parts[parts.length - 1] === "json" //those contain links to the other types.
+            ).map(parts =>           //join it all back together but leave out the file type
+                parts.splice(0, parts.length - 1).join('.')
+            )
+        );
 
+        
         //return
 		resolve();
 	}),

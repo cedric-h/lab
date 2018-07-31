@@ -27,7 +27,7 @@ module.exports = {
         {
             let distance = flightpath.start.distanceTo(flightpath.end);
             flightpath.totalTime = distance/flightpath.speed;
-            flightpath.height    = distance/12;
+            //flightpath.height    = distance/12;
         }
 
         flightpath.time += delta;

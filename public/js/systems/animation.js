@@ -1,7 +1,5 @@
 define(['../lib/three.js'], function(THREE)
 {
-	var collisionMaps = {};
-
 	entities.emitter.on('animationCreate', entity =>
 	{
 		let animation = entities.getComponent(entity, "animation");
@@ -21,8 +19,9 @@ define(['../lib/three.js'], function(THREE)
 		update: (entity, delta) =>
 		{
 			let animation = entities.getComponent(entity, "animation");
-			
-			animation.mixer.update(delta);
+
+			if(animation.active)
+				animation.mixer.update(delta);
 		}
 	}
 });

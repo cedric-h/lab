@@ -1,20 +1,24 @@
 define(['../lib/three.js'], function(THREE)
 {
-	//variable declaration
-	var walking;
-
-
 	//event listener for setting up animation stuff when the playermodel loads
 	entities.emitter.on('movementCreate', entity =>
 	{
 		let movement 	= entities.getComponent(entity, "movement");
-		let playerModel = entities.getComponent(entity, "model");
+		let dependents 	= entities.getComponent(entity, "dependents");
+
+		let model 	    = entities.getComponent(entity, "model");
 		let animation 	= entities.getComponent(entity, "animation");
 
-		if(movement && playerModel && animation)
-			walking = animation.mixer.clipAction(
-				THREE.AnimationClip.findByName(playerModel.geometry.animations, "run")
-			).play();
+		if(animation)
+		{
+			let runClip = THREE.AnimationClip.findByName(
+				model.geometry.animations,
+				"run"
+			);
+
+			if(runClip)
+				movement.animation = animation.mixer.clipAction(runClip).play();
+		}
 	});
 
 
@@ -28,25 +32,26 @@ define(['../lib/three.js'], function(THREE)
 		}),
 		update: (entity, delta) =>
 		{
-			let movement  = entities.getComponent(entity, "movement");
+			let movement   = entities.getComponent(entity, "movement");
+
 			let animation = entities.getComponent(entity, "animation");
 
 			if(movement.active && animation.initialized)
-				walking.setEffectiveWeight(
+				movement.animation.setEffectiveWeight(
 					Math.min(movement.currentSpeed/movement.maxSpeed * 2.6, 1)
 				);
 
 			else
 			{
-				//if the walking animation has been instantiated
-				if(walking)
+				//if the movement.animation has been instantiated
+				if(movement.animation)
 				{
 					//console.log(movement.currentSpeed, movement.maxSpeed);
-					if(walking.weight !== 0 && movement.currentSpeed === 0)
-						walking.setEffectiveWeight(0);
+					if(movement.animation.weight !== 0 && movement.currentSpeed === 0)
+						movement.animation.setEffectiveWeight(0);
 
 					else
-						walking.setEffectiveWeight(
+						movement.animation.setEffectiveWeight(
 							Math.min(movement.currentSpeed/movement.maxSpeed * 2.6, 1)
 						);
 				}

@@ -54,10 +54,7 @@ Promise.all(directoriesToGet.map(x => fs.readdir(x))).then((folders) =>
 				folder[fileIndex].name = fileName.split('.')[0];
 
 				if(folder[fileIndex].serverAndClient)
-				{
-					console.log('loading shared file by name of ', directoriesToGet[folderIndex], fileName);
 					folders[folderIndex - 2].push(folder[fileIndex]);
-				}
 			}
 
 			catch(error)

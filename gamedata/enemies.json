@@ -4,7 +4,8 @@
 			{
 				"position": [10,	0, 		0],
 				"scaleVariance": [1.75, 1.75],
-				"health": 1
+				"weapon": "bow",
+				"health": 15
 			},
 			{
 				"position": [10,	-2, 	0]
@@ -26,6 +27,7 @@
 			}
 		],
 		"scaleVariance": [1, 0.95],
-		"health":1
+		"health": 9,
+		"weapon": "club"
 	}
 }

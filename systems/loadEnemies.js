@@ -13,21 +13,28 @@ const broadcast = require('../broadcast.js');
 //helper functions
 const getEnemyData = (entity) =>
 {
-	let model 	 = entities.getComponent(entity, 'model');
+    let model    = entities.getComponent(entity, 'model');
+	let weapon 	 = entities.getComponent(entity, 'weapon');
 
 	return {
+        //default components and override values (for primitives)
 		components: [
 			'modelName',
-			"health",
-			'targetable'
+			'health',
+			'targetable',
+            'weapon',
 		],
 		componentOverrides: {
 			modelName: 'angryBoi',
 			serverId: entity
 		},
+        //orientation and model customization
 		position: 	model.position	.toArray(),
 		quaternion: model.quaternion.toArray(),
-		scale: 		model.scale 	.toArray()
+		scale: 		model.scale 	.toArray(),
+        //weaponry
+        dependents: true,
+        weaponName: weapon.name
 	}
 };
 
@@ -71,9 +78,11 @@ module.exports = {
         			let enemyEntity = entities.create();
         			entities.addComponent(enemyEntity, "ai");
         			entities.addComponent(enemyEntity, "model");
-        			entities.addComponent(enemyEntity, "health");
+                    entities.addComponent(enemyEntity, "health");
+        			entities.addComponent(enemyEntity, "weapon");
         			entities.addComponent(enemyEntity, "attackable");
 
+                    //model
         			entities.entities[enemyEntity].model = enemyName;
         			entities.emitter.emit('modelRequest', enemyEntity);
         			let model = entities.getComponent(enemyEntity, "model");
@@ -83,6 +92,11 @@ module.exports = {
         				getRandom(enemy.scaleVariance || enemyType.scaleVariance)
         			);
 
+                    //weapon
+                    let weapon  = entities.getComponent(enemyEntity, "weapon");
+                    weapon.name = enemy.weapon || enemyType.weapon;
+
+                    //health
         			let health = entities.getComponent(enemyEntity, 'health');
         			health.val = enemy.health || enemyType.health;
         			health.max = health.val;

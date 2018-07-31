@@ -129,6 +129,18 @@ define(['../lib/three.js'], function(THREE)
 		//top of all of them?
 	}
 
+	//block input and emit event, otherwise updateKeyMap
+	function updateOrBlock(entity, event)
+	{
+		let moveControls = entities.getComponent(entity, "movementControls");
+
+		if(moveControls.blocked)
+			entities.emitter.emit('movementControlsBlocked');
+
+		else
+			updateKeyMap(event);
+	}
+
 
 	//turning on event listeners once the movementControls entity is created
 	entities.emitter.once('movementControlsCreate', entity =>
@@ -141,12 +153,12 @@ define(['../lib/three.js'], function(THREE)
 		window.addEventListener('keydown', event =>
 		{
 			if(moveControls.keyMap.hasOwnProperty(event.key) && moveControls.keyMap[event.key].isPressed !== true)
-				updateKeyMap(event);
+				updateOrBlock(entity, event);
 		});
 		window.addEventListener('keyup', event =>
 		{
 			if(moveControls.keyMap.hasOwnProperty(event.key))
-				updateKeyMap(event);
+				updateOrBlock(entity, event);
 		});
 
 		//assign handleWallCollisions

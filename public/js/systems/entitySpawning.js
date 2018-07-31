@@ -34,6 +34,7 @@ define(['../lib/three.js'], function(THREE)
             entities.setComponent(entity, component, override);
         });
 
+        //configuration for individual components
         if(entityData.components.indexOf("modelName") !== -1)
         {
             entities.addComponent(entity, "model");
@@ -46,11 +47,20 @@ define(['../lib/three.js'], function(THREE)
                     model[orientation].fromArray(entityData[orientation]);
             });
         }
+
+        if(entityData.components.indexOf('weapon') !== -1)
+        {
+            let weapon = entities.getComponent(entity, "weapon");
+            weapon.name = entityData.weaponName;
+            entities.emitter.emit('weaponEquip', entity);
+        }
     }
 
 
     entities.emitter.on('loaded', () =>
     {
+        //when the server sends us players/enemiesToInstantiate, load those.
+        //these are the entities
         Promise.all(
             ['players', 'enemies'].map(modelSource =>
             {
