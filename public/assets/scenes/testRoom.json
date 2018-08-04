@@ -31,14 +31,14 @@
         "depthWrite":true,
         "specular":8355711,
         "name":"Material",
-        "color":10724259,
+        "color":9211020,
         "type":"MeshPhongMaterial"
     },{
         "uuid":"E01A2270-C4C5-4225-917D-ACDC02FEA09D",
         "normalScale":[1,1],
         "specular":8355711,
         "blending":1,
-        "color":11250603,
+        "color":9211020,
         "emissive":0,
         "vertexColors":0,
         "depthTest":true,

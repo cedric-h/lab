@@ -14,7 +14,8 @@ const broadcast = require('../broadcast.js');
 const getEnemyData = (entity) =>
 {
     let model    = entities.getComponent(entity, 'model');
-	let weapon 	 = entities.getComponent(entity, 'weapon');
+    let weapon   = entities.getComponent(entity, 'weapon');
+	let combat 	 = entities.getComponent(entity, 'combat');
 
 	return {
         //default components and override values (for primitives)
@@ -23,6 +24,7 @@ const getEnemyData = (entity) =>
 			'health',
 			'targetable',
             'weapon',
+            'animation'
 		],
 		componentOverrides: {
 			modelName: 'angryBoi',
@@ -33,7 +35,6 @@ const getEnemyData = (entity) =>
 		quaternion: model.quaternion.toArray(),
 		scale: 		model.scale 	.toArray(),
         //weaponry
-        dependents: true,
         weaponName: weapon.name
 	}
 };
@@ -52,9 +53,8 @@ entities.emitter.on("clientCreate", entity =>
 	let client = entities.getComponent(entity, "client");
 
 	client.once('loaded', () =>
-	{
-		client.send('enemiesToInstantiate', entities.find('enemy').map(getEnemyData));
-	});
+		client.send('enemiesToInstantiate', entities.find('enemy').map(getEnemyData))
+    );
 });
 
 
@@ -77,14 +77,15 @@ module.exports = {
         		{
         			let enemyEntity = entities.create();
         			entities.addComponent(enemyEntity, "ai");
-        			entities.addComponent(enemyEntity, "model");
+        			entities.addComponent(enemyEntity, "combat");
                     entities.addComponent(enemyEntity, "health");
         			entities.addComponent(enemyEntity, "weapon");
         			entities.addComponent(enemyEntity, "attackable");
-
                     //model
-        			entities.entities[enemyEntity].model = enemyName;
-        			entities.emitter.emit('modelRequest', enemyEntity);
+                    entities.addComponent(enemyEntity, "modelName");
+                    entities.setComponent(enemyEntity, "modelName", enemyName);
+                    entities.addComponent(enemyEntity, "model");
+
         			let model = entities.getComponent(enemyEntity, "model");
         			//after model loads
         			model.position.fromArray(enemy.position);
@@ -95,6 +96,7 @@ module.exports = {
                     //weapon
                     let weapon  = entities.getComponent(enemyEntity, "weapon");
                     weapon.name = enemy.weapon || enemyType.weapon;
+                    entities.emitter.emit('weaponEquip', enemyEntity);
 
                     //health
         			let health = entities.getComponent(enemyEntity, 'health');

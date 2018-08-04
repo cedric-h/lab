@@ -13,23 +13,34 @@ const meshLocations = [];
 
 
 //listening for a new player to join so you can give them stuff to load
-entities.emitter.on('clientCreate', clientEntity =>
+entities.emitter.on('clientCreate', entity =>
 {
-	let client = entities.getComponent(clientEntity, 'client');
+	let client = entities.getComponent(entity, 'client');
 
 	//helpful logging
     console.log('client connected');
 
     //then just tell the client where stuff is so that they can load it.
-    client.on('loadingECS', () =>
+    client.once('loadingECS', () =>
         client.send('ecsFiles', ecsFiles)
     );
 
     //tell the player where the models they need to load are
-    client.on('loading', () =>
-        client.send('meshLocations', meshLocations)
-    );
-})
+    client.once('loading', () =>
+    {
+        client.send('meshLocations', meshLocations);
+
+        //model
+        entities.addComponent(entity, "modelName");
+        entities.setComponent(entity, "modelName", "player");
+        entities.addComponent(entity, "model");
+
+        //weapon
+        entities.addComponent(entity, "weapon");
+        entities.getComponent(entity, "weapon").name = "bow";
+        entities.emitter.emit('weaponEquip', entity);
+    });
+});
 
 
 //ECS exports

@@ -1,24 +1,38 @@
 define(['../lib/three.js'], function(THREE)
 {
+	function addRunningAnimation(entity)
+	{
+		let movement  = entities.getComponent(entity, "movement");
+		let model 	  = entities.getComponent(entity, "model");
+		let animation = entities.getComponent(entity, "animation");
+
+		let runClip = THREE.AnimationClip.findByName(
+			model.geometry.animations,
+			"run"
+		);
+
+		if(runClip)
+			movement.animation = animation.mixer.clipAction(runClip).play();
+	}
+
+
 	//event listener for setting up animation stuff when the playermodel loads
 	entities.emitter.on('movementCreate', entity =>
 	{
-		let movement 	= entities.getComponent(entity, "movement");
-		let dependents 	= entities.getComponent(entity, "dependents");
-
-		let model 	    = entities.getComponent(entity, "model");
 		let animation 	= entities.getComponent(entity, "animation");
 
-		if(animation)
-		{
-			let runClip = THREE.AnimationClip.findByName(
-				model.geometry.animations,
-				"run"
-			);
+		if(animation.initialized)
+			addRunningAnimation(entity);
 
-			if(runClip)
-				movement.animation = animation.mixer.clipAction(runClip).play();
-		}
+		else
+			entities.emitter.on('animationInit', function addOnInit(animationInitEntity)
+			{
+				if(entity === animationInitEntity)
+				{
+					addRunningAnimation(entity)
+					entities.emitter.removeListener('animationInit', addOnInit);
+				}
+			});
 	});
 
 
@@ -32,11 +46,13 @@ define(['../lib/three.js'], function(THREE)
 		}),
 		update: (entity, delta) =>
 		{
-			let movement   = entities.getComponent(entity, "movement");
+			let movement   		 = entities.getComponent(entity, "movement");
+			let animation 		 = entities.getComponent(entity, "animation");
+			let movementControls = entities.getComponent(entity, "movementControls");
+			
 
-			let animation = entities.getComponent(entity, "animation");
-
-			if(movement.active && animation.initialized)
+			//playing animation
+			if((movement.active || movementControls === undefined) && animation.initialized)
 				movement.animation.setEffectiveWeight(
 					Math.min(movement.currentSpeed/movement.maxSpeed * 2.6, 1)
 				);

@@ -18,104 +18,34 @@ var preparationTimes = {};
 
 
 //helper functions
-const shouldFire = combat =>
-	entities.getComponent(combat.target, "health").val > 0 &&
-	entities.find('model').indexOf(combat.target) !== -1   &&
-	combat.projectileCount < 8;
+const shouldFire = entity =>
+{	
+	let combat = entities.getComponent(entity, "combat");
+	let health = entities.getComponent(entity, "health");
 
-
-function attack(attackerEntity)
-{
-	//attacker components
-	let combat 		= entities.getComponent(attackerEntity, "combat");
-	let playerModel = entities.getComponent(attackerEntity, "model");
-	let client 		= entities.getComponent(attackerEntity, "client");
-	//target components
-	let targetModel = entities.getComponent(combat.target, "model");
-
-	//record the firing of this new projectile     
-	combat.projectileCount++;
-
-	//modify where the arrow will go with some juicy randomness
-	let targetPosition = targetModel.position.clone();
-	let size 	       = new THREE.Vector3();
-	let targetBox      = new THREE.Box3();
-    targetBox.setFromArray(targetModel.geometry.vertices);
-    targetBox.getSize(size);
-    //apply randomness based on the dimensions of the target model
-    targetPosition.x += (size.x * targetModel.scale.x) * (0.4 - Math.random()*0.8);
-    targetPosition.y += (size.y * targetModel.scale.y) * (0.4 - Math.random()*0.8);
-    targetPosition.z += (size.z * targetModel.scale.z) * (0.2 + Math.random()*0.6);
-
-    //have the player shift their gun to point at the targetPosition instead of the model's origin
-    broadcast('aimWeaponAt', {
-		attackerEntity: attackerEntity,
-		targetPosition: targetPosition.toArray()
-	});
-
-    //wait a bit, then fire the arrow
-    setTimeout(
-    	() =>
-    	{
-    		//get the arrow set up
-			let arrowEntity = entities.create();
-			//add components
-			entities.addComponent(arrowEntity, "model");
-			entities.addComponent(arrowEntity, "flightpath");
-			//grab components
-			let arrowModel = entities.getComponent(arrowEntity, "model");
-			let flightpath = entities.getComponent(arrowEntity, "flightpath");
-			
-			//stick the arrow in their gun
-			arrowModel.position.set(0.7, 0, 1.17);//hardcoding this is bad
-			//these next commands spin the arrow position if the player is rotated
-			playerModel.updateMatrixWorld();
-			arrowModel.position.copy(playerModel.localToWorld(arrowModel.position));
-
-			//configure the flightpath
-			flightpath.start.copy(arrowModel.position);
-			flightpath.end  .copy(targetPosition);
-			flightpath.speed = 20;
-
-			//make sure the arrow points in the right direction
-			arrowModel.lookAt(flightpath.end);
-
-			//let the player know about the new arrow
-			broadcast('entitySpawn', {
-				components: [
-					"modelName"
-				],
-				componentOverrides: {
-					serverId: arrowEntity,
-					modelName: "arrow"
-				},
-				position: 	 arrowModel.position  .toArray(),
-				quaternion:  arrowModel.quaternion.toArray()
-			});
-
-			//do damage once the arrow is removed.
-		    entities.emitter.on('flightpathRemove', function dealDamage(thisArrowEntity)
-			{
-				if(thisArrowEntity === arrowEntity)
-				{
-					//in case the target died while the arrow was flying.
-					if(entities.find('health').indexOf(combat.target) !== -1)
-					{
-						let health = entities.getComponent(combat.target, 'health');
-
-						if(health)
-							health.val -= 1;
-					}
-
-					combat.projectileCount--;
-
-					entities.emitter.removeListener("flightpathRemove", dealDamage);
-				}
-			});
-    	},
-    	650
-    )
+	return (
+		health.val > 0											&&
+		combat.readied											&&
+		combat.target !== undefined 						   	&&
+		entities.find('health').indexOf(combat.target) !== -1 	&&
+		entities.getComponent(combat.target, "health").val > 0 	&&
+		entities.find('model' ).indexOf(combat.target) !== -1   &&
+		combat.projectileCount < 8
+	);
 }
+
+
+//remove targets if the target player died.
+entities.emitter.on('modelRemove', removedEntity =>
+{
+    entities.find('combat').forEach(entity =>
+    {
+        let combat = entities.getComponent(entity, "combat");
+
+        if(combat.target === removedEntity)
+            combat.target = undefined;
+    });
+});
 
 
 //client event listeners
@@ -126,80 +56,168 @@ entities.emitter.on('combatCreate', entity =>
 
 	combat.emitter.on('newTarget', targetEntity =>
 	{
-		combat.target = targetEntity;
+		if(entities.find('model').indexOf(targetEntity) !== -1)
+		{
+			combat.target = targetEntity;
 
-		//model grabbing
-		let targetModel = entities.getComponent(combat.target, "model");
-		let playerModel = entities.getComponent(entity,        "model");
+			//model grabbing
+			let targetModel   = entities.getComponent(combat.target, "model");
+			let attackerModel = entities.getComponent(entity,        "model");
 
-		if(client)
-			client.send(
-				'faceTowards',
-				new THREE.Quaternion().setFromEuler(
-					new THREE.Euler(0, 0, Math.atan2(
-							targetModel.position.y - playerModel.position.y,
-							targetModel.position.x - playerModel.position.x
+			if(client)
+				client.send(
+					'faceTowards',
+					new THREE.Quaternion().setFromEuler(
+						new THREE.Euler(0, 0, Math.atan2(
+								targetModel.position.y - attackerModel.position.y,
+								targetModel.position.x - attackerModel.position.x
+							)
 						)
-					)
-				).toArray()
-			);
+					).toArray()
+				);
 
-		broadcast('readyingAnimation');
+			broadcast('targetingUpdate', {
+				attackerEntity: entity,
+				targetEntity: 	combat.target
+			});
+
+			setTimeout(
+				() =>
+				{
+					combat.readied = true;
+					combat.readiedPosition.copy(attackerModel.position);
+				},
+				preparationTimes['shoot'] * 1000
+			)
+		}
 	});
 
 	combat.emitter.on('launchAttack', attackData =>
 	{
-		//player components
-		let combat 		= entities.getComponent(entity, "combat");
-		let playerModel = entities.getComponent(entity, "model");
-
-		//make sure the target hasn't already been killed
-		if(shouldFire(combat))
+		if(shouldFire(entity))
 		{
+			//attacker components
+			let combat 		= entities.getComponent(entity, "combat");
+			let attackerModel = entities.getComponent(entity, "model");
+
+			//make sure the target hasn't already been killed
 			let targetModel = entities.getComponent(combat.target, "model");
 			let direction = Math.atan2(
-				targetModel.position.y - playerModel.position.y,
-				targetModel.position.x - playerModel.position.x
+				targetModel.position.y - attackerModel.position.y,
+				targetModel.position.x - attackerModel.position.x
 			);
 
 			//check to see if they're in the right position until they are, then shoot.
 			(function positionCheck()
 			{
-				//get new playermodel, with updated position
-				let playerModel = entities.getComponent(entity, "model");
-				let playerDirection = playerModel.rotation.z;
-
-				if(playerDirection < direction + 0.01 || playerDirection > direction - 0.01)
+				//get new attackermodel, with updated position
+				if(entity !== undefined && entities.find('model').indexOf(entity) !== -1)
 				{
-					//make sure the target hasn't died since the last time we checked
-					//to see if they were there
-					if(shouldFire(combat))
-						attack(entity)
-						
-				}
+					let attackerModel = entities.getComponent(entity, "model");
+					let attackerDirection = attackerModel.rotation.z;
 
-				else if(shouldFire(combat))
-					setTimeout(positionCheck, 100);
+					if(shouldFire(entity))
+					{
+						if(
+							attackerDirection < direction + 0.09 &&
+							attackerDirection > direction - 0.09
+						)
+							combat.emitter.emit('launchRangedAttack');//see rangedAttack.js
+
+						else
+							setTimeout(positionCheck, 100);
+					}
+				}
 			})();
 		}
 	});
 });
 
 
-//transferring events from a client to their combat emitter
+//handle client combat
 entities.emitter.on('clientCreate', entity =>
 {
 	let client = entities.getComponent(entity, "client");
 	entities.addComponent(entity, "combat");
 
+	//when they join get them up to date.
+	client.once('entitiesInstantiated', () =>
+	{
+		entities.find('combat').forEach(combatEntity =>
+		{
+			let combat = entities.getComponent(combatEntity, "combat");
+
+			if(combat.target)
+				client.send('targetingUpdate', {
+					attackerEntity: combatEntity,
+					targetEntity: 	combat.target
+				});
+		});
+	});
+
+	//transfer client events to combat.emitter
 	[
 		'launchAttack',
 		'newTarget'
 	].forEach(eventName =>
-		client.on(eventName, data =>
-			entities.getComponent(entity, "combat").emitter.emit(eventName, data)
-		)
+	{
+		let transferEvent = data =>
+			entities.getComponent(entity, "combat").emitter.emit(eventName, data);
+
+		client.on(eventName, transferEvent);
+
+		entities.emitter.on('clientRemove', function removeListeners(removedClientEntity)
+		{
+			if(removedClientEntity === entity)
+			{
+				client.removeListener(eventName, transferEvent);
+				client.removeListener('clientRemove', removeListeners);
+			}
+		});
+	});
+
+	//unready if they move, so they can't shoot.
+	let unreadyIfMoved = setInterval(
+		() =>
+		{
+			let combat = entities.getComponent(entity, 'combat');
+			let model  = entities.getComponent(entity, 'model');
+
+			let lastPos = combat.readiedPosition;
+
+			if(
+				model &&
+				(
+					model.position.x > lastPos.x + 0.4 ||
+					model.position.x < lastPos.x - 0.4 ||
+					model.position.y > lastPos.y + 0.4 ||
+					model.position.y < lastPos.y - 0.4
+				)
+			)
+				combat.readied = false;
+		},
+		100
 	);
+
+	//unready if they stopped aiming on the clientside.
+	const unreadyOnAimingStop = () =>
+	{
+		if(entities.find('combat').indexOf(entity) !== -1)
+			entities.getComponent(entity, "combat").readied = false;
+	}
+
+	client.on('readiedNoLonger', unreadyOnAimingStop);
+
+	//cleanup all of these listeners if the client leaves.
+	entities.emitter.on('clientRemove', function removeListeners(removedClientEntity)
+	{
+		if(removedClientEntity === entity)
+		{
+			clearInterval(unreadyIfMoved);
+			entities.emitter.removeListener('readiedNoLonger', unreadyOnAimingStop);
+			entities.emitter.removeListener('clientRemove',    removeListeners);
+		}
+	});
 });
 
 

@@ -5,7 +5,6 @@
 
 
 	var exportObject = {
-		serverAndClient: true,
 		load: new Promise((resolve, reject) =>
 		{
 			resolve();
@@ -21,7 +20,8 @@
 				isUp: 			false,
 				isMoving: 		false,
 				adjustments: 	{},
-				targetPosition: new THREE.Vector3()
+				targetPos: 		new THREE.Vector3(),
+				targetEntity: 	undefined
 			}
 		}
 	}

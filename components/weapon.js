@@ -5,18 +5,16 @@
 
 
 	var exportObject = {
-		serverAndClient: true,
 		load: new Promise((resolve, reject) =>
 		{
 			resolve();
 		}),
 		factory: () =>
 		{
-			return 'player';
-		},
-		reset: modelName =>
-		{
-			modelName = "player";
+			return {
+				name: 	undefined,
+				model: 	undefined,
+			}
 		}
 	}
 

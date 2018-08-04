@@ -1,83 +1,139 @@
 define(['../lib/three.js'], function(THREE)
 {
-	//assign that listener
+	//helper functions
+    //take a serverId, return the entity with said id
+    function entityWithId(serverId)
+    {
+        let entityFound = undefined;
+
+        entities.find('serverId').forEach(entity =>
+        {
+            if(entities.getComponent(entity, "serverId") === serverId)
+                entityFound = entity;
+        });
+
+        return entityFound;
+    }
+
+    function prepareAnimation(entity)
+    {
+    	let model 	  = entities.getComponent(entity, "model");
+		let weapon 	  = entities.getComponent(entity, "weapon");
+		let animation = entities.getComponent(entity, "animation");
+
+		//grab the readying animation from the model's data
+		let readyClip = THREE.AnimationClip.findByName(model.geometry.animations, "shoot");
+
+		if(readyClip)
+		{
+			weapon.animation = animation.mixer.clipAction(readyClip);
+
+			//configure the readying animation
+			weapon.animation.loop = THREE.LoopOnce;
+			weapon.animation.clampWhenFinished = true;
+		}
+    }
+
+
+	//prepare weapon animations when a weapon is equipped
 	entities.emitter.on('weaponEquip', entity =>
 	{
 		if(!entities.getComponent(entity, "weapon").animation)
 		{
-			let playerModel = entities.getComponent(entity, "model");
-			let weapon 		= entities.getComponent(entity, "weapon");
-			let animation 	= entities.getComponent(entity, "animation");
+			let animation = entities.getComponent(entity, "animation");
 
-			//grab the readying animation from the model's data
-			let readyClip = THREE.AnimationClip.findByName(playerModel.geometry.animations, "shoot");
+			if(animation.initialized)
+				prepareAnimation(entity);
 
-			if(readyClip)
-			{
-				weapon.animation = animation.mixer.clipAction(readyClip);
-
-				//configure the readying animation
-				weapon.animation.loop = THREE.LoopOnce;
-				weapon.animation.clampWhenFinished = true;
-			}
+			else
+				new Promise(resolve => resolve()).then(() =>
+					prepareAnimation(entity)
+				);
 		}
 	});
 
 
 	//event listeners that pertain to starting and stopping the animation
-	server.on('dereadyingAnimation', () =>
-		entities.getComponent(
-			entities.find('movementControls')[0],
-			"weapon"
-		).shouldStop = true
-	);
-
-	server.on('readyingAnimation', () =>
+	server.on('targetingUpdate', data =>
 	{
-		let localEntity = entities.find('movementControls')[0];
+		let attackerEntity = entityWithId(data.attackerEntity);
+		let targetEntity = entityWithId(data.targetEntity);
 
-		let weapon 			 = entities.getComponent(localEntity, "weapon");
-		let movementControls = entities.getComponent(localEntity, "movementControls");
-		let velocity 		 = entities.getComponent(localEntity, "velocity");
-		let movement 		 = entities.getComponent(localEntity, "movement");
-
-		weapon.targetPosition.copy(
-			entities.getComponent(entities.find('targeted')[0], "model").position
-		);
-
-		if(!weapon.isUp && !weapon.isMoving)
-			weapon.shouldShoot = true;
-
-		movementControls.blocked = true;
-		movement.active = false;
-		movement.currentSpeed = 0;
-		velocity.set(0, 0, 0);
-
-		entities.emitter.on('movementControlsBlocked', function unblockControls()
+		if(targetEntity !== undefined && attackerEntity !== undefined)
 		{
-			let weapon = entities.getComponent(localEntity, 'weapon');
+			let weapon = entities.getComponent(attackerEntity, "weapon");
 
-			if(!weapon.isMoving)
+			if(!weapon.isUp && !weapon.isMoving)
 			{
-				weapon.shouldStop = true;
+				weapon.shouldShoot = true;
 
-				entities.emitter.removeListener('movementControlsBlocked', unblockControls);
+				if(attackerEntity === entities.find('movementControls')[0])
+				{
+					let movement 		 = entities.getComponent(attackerEntity, "movement");
+					let velocity 		 = entities.getComponent(attackerEntity, "velocity");
+					let movementControls = entities.getComponent(attackerEntity, "movementControls");
+
+					movementControls.blocked = true;
+					movement.active = false;
+					movement.currentSpeed = 0;
+					velocity.set(0, 0, 0);
+
+					entities.emitter.on('movementControlsBlocked', function unblockControls()
+					{
+						let weapon = entities.getComponent(attackerEntity, 'weapon');
+
+						if(!weapon.isMoving)
+						{
+							weapon.shouldStop = true;
+
+							entities.emitter.removeListener(
+								'movementControlsBlocked',
+								unblockControls
+							);
+						}
+					});
+				}
 			}
-		});
+		}
 	});
 
 
-	//event listener for repositioning the gun.
+	//event listeners for aiming
 	server.on('aimWeaponAt', data =>
 	{
-		//find the local entity with that server id
+		let attackerEntity = entityWithId(data.attackerEntity);
 
-		entities.getComponent(
-			entities.find('serverId').filter(
-				entity => entities.getComponent(entity, "serverId") === data.attackerEntity
-			),
-			"weapon"
-		).targetPosition.fromArray(data.targetPosition);
+		if(attackerEntity !== undefined)
+		{
+			let weapon = entities.getComponent(attackerEntity, "weapon");
+
+			weapon.targetPos.fromArray(data.targetPos);
+			weapon.targetPosUpdated = true;
+		}
+	});
+
+	server.on('targetingUpdate', data =>
+	{
+		let attackerEntity = entityWithId(data.attackerEntity);
+
+		if(attackerEntity !== undefined)
+		{
+			let weapon = entities.getComponent(attackerEntity, "weapon");
+
+			weapon.targetEntity = entityWithId(data.targetEntity);
+			weapon.targetPosUpdated = false;
+		}
+	});
+
+	entities.emitter.on('modelRemove', removedModelEntity =>
+	{
+		entities.find('weapon').forEach(weaponEntity =>
+		{
+			let weapon = entities.getComponent(weaponEntity, "weapon");
+
+			if(weapon.targetEntity === removedModelEntity)
+				weapon.targetEntity = undefined;
+		});
 	});
 
 
@@ -101,12 +157,15 @@ define(['../lib/three.js'], function(THREE)
 					weapon.model.position.add(weapon.adjustments.position);
 
 				//manage pointing the gun at the targeted entity
-				let targeted = entities.find('targeted')[0];
-
-				if(weapon.isUp && targeted)
+				if(weapon.isUp && weapon.targetEntity !== undefined)
 				{
-					let targetModel = entities.getComponent(targeted, 'model');
-					weapon.model.lookAt(weapon.targetPosition);
+					if(weapon.targetPosUpdated)
+						weapon.model.lookAt(weapon.targetPos);
+
+					else
+						weapon.model.lookAt(
+							entities.getComponent(weapon.targetEntity, "model").position
+						);
 				}
 
 				//have the gun act as if it was just a child of the weaponBone
@@ -177,7 +236,7 @@ define(['../lib/three.js'], function(THREE)
 					{
 						setTimeout(
 							() => movementControls.blocked = false,
-							weapon.animation.getClip().duration * 1000 * 0.8
+							weapon.animation.getClip().duration * 1000 * 0.2
 						)
 					}
 
@@ -190,6 +249,8 @@ define(['../lib/three.js'], function(THREE)
 
 							weapon.isMoving = false;
 							weapon.isUp = false;
+
+							server.emit('readiedNoLonger');
 
 							weapon.animation.setEffectiveTimeScale(1);
 							weapon.animation.setEffectiveWeight(0);

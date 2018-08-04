@@ -3,9 +3,10 @@ define(['../lib/three.js'], function(THREE)
     //helper functions
     function updateMovementData(entity, data)
     {
-        let serverId           = entities.getComponent(entity, "serverId");
-        let model              = entities.getComponent(entity, "model");
-        let movementControls   = entities.getComponent(entity, "movementControls");
+        let serverId         = entities.getComponent(entity, "serverId");
+        let model            = entities.getComponent(entity, "model");
+        let movementControls = entities.getComponent(entity, "movementControls");
+        let movement         = entities.getComponent(entity, "movement");
 
         if(typeof model !== "string" && data && !movementControls)
         {
@@ -14,6 +15,10 @@ define(['../lib/three.js'], function(THREE)
             model.quaternion.fromArray(data.quaternion);
             if(data.scale)
                 model.scale.fromArray(data.scale);
+
+            //movement speed for animation if supplied
+            if(data.currentSpeed && movement !== undefined)
+                movement.currentSpeed = data.currentSpeed;
         }
     }
 

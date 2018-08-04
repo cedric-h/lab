@@ -6,7 +6,7 @@
 	var ecs;
 
 	//constants
-	const friction = 0.98;//percentage remaining after one second.
+	const defaultFriction = 0.98;//percentage remaining after one second.
 
 	//ECS output
 	var exportObject = {
@@ -36,6 +36,7 @@
 				{
 					if(velocityParameters.frictionOn)
 					{
+						let friction = velocityParameters.friction || defaultFriction;
 						let frictionThisFrame = Math.pow(1.0 - friction, delta);
 
 						//apply friction to the velocity

@@ -43,9 +43,8 @@ module.exports = {
     componentTypesAffected: ["health"],
     searchName: "health",
     load: new Promise((resolve, reject) =>
-    {
-        resolve();
-    }),
+        resolve()
+    ),
     update: (entity, delta) => 
     {
         let health = entities.getComponent(entity, "health");
@@ -58,19 +57,8 @@ module.exports = {
             });
 
             //the .dying flag is to make sure you don't set multiple timeouts to kill the thing.
-            if(health.val <= 0 && !health.dying)
-            {
-                health.dying = true;
-
-                //don't kill the thing immediately because its health depletion animation should
-                //finish first, instead wait the length of the animation just in case, then kill it.
-                //if we add a dying animation or whatever, we should probably make it the same
-                //length just to make this easier.
-                setTimeout(
-                    () => entities.destroy(entity),
-                    6.099999904632568 * 1000 //how long it takes for a health ring to deplete
-                );
-            }
+            if(health.val <= 0)
+                entities.destroy(entity);
 
             lastBroadcasted[entity] = health.val;
         }

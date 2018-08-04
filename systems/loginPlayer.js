@@ -14,11 +14,11 @@ const broadcast = require('../broadcast.js');
 require('../host.js')((ws) =>
 {
     //make the new player
-    let newPlayer = entities.create();
-    entities.addComponent(newPlayer, 'client');
+    let newPlayerEntity = entities.create();
+    entities.addComponent(newPlayerEntity, 'client');
 
     //now let's initialize that client we just added
-    let client = entities.getComponent(newPlayer, 'client');
+    let client = entities.getComponent(newPlayerEntity, 'client');
     client.initialize(ws);
 
     client.once('loaded', () =>
@@ -26,23 +26,34 @@ require('../host.js')((ws) =>
         //tell everyone but the new player that a player joined.
         entities.find("client").forEach(entity =>
         {
-            if(entity !== newPlayer)
+            if(entity !== newPlayerEntity)
                 entities.getComponent(entity, "client").send('playerJoin', {
-                    serverId: newPlayer
+                    serverId: newPlayerEntity
                 });
         });
 
         //tell the new player what the server thinks their id is,
         //so they can pull their information out of packages the server
         //sends them.
-        client.send('localId', newPlayer);
+        client.send('localId', newPlayerEntity);
     });
 
-    client.ws.once('close', () =>
+    let removePlayer = () =>
     {
-        entities.destroy(newPlayer);
-        broadcast('playerLeave', entities.find('client').length);
-    });
+        entities.destroy(newPlayerEntity);
+        broadcast('entityDespawn', entities.find('client').length);
+    }
+
+    client.ws.on('close', removePlayer);
+
+    entities.emitter.on('clientRemove', function cleanUpHandler(entity)
+    {
+        if(entity === newPlayerEntity)
+        {
+            client.ws.removeListener('close', removePlayer);
+            entities.emitter.removeListener('clientRemove', cleanUpHandler);
+        }
+    })
 });
 
 //ECS exports

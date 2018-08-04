@@ -7,20 +7,29 @@ let entities = ECSbus.entities;
 const broadcast = require('../broadcast.js');
 
 
-//helper function
-const getPlayerData = function(id)
+//variable declarations
+var currentSpeeds = {};
+
+
+//helper functions
+const getPlayerData = function(entity)
 {
-	//more configuration other than just string overwrites should be done in their own system
+	let weapon = entities.getComponent(entity, "weapon");
+
 	return {
 		components: [
 			"animation",
-			"model",
-			"health"
+			"modelName",
+			"movement",
+			"weapon",
+			"health",
+			"model"
 		],
 		componentOverrides: {
-			serverId: id,
-			model: "player"
-		}
+			serverId: entity,
+			modelName: "player"
+		},
+		weaponName: weapon.name
 	}
 }
 
@@ -33,7 +42,7 @@ entities.emitter.on('clientCreate', entity =>
 	//give players that just logged in data about the surrounding entities
 	//tell the player where all of the models are
 
-	client.once('loading', () =>
+	client.once('loaded', () =>
 	{
 		let playersToInstantiate = [];
 
@@ -48,7 +57,6 @@ entities.emitter.on('clientCreate', entity =>
 	
 	client.once('loaded', () =>
 	{
-		entities.addComponent(entity, "model");
 		let model = entities.getComponent(entity, "model");
 
 		//tell everyone but the new player that a player joined.
@@ -59,14 +67,6 @@ entities.emitter.on('clientCreate', entity =>
                     getPlayerData(entity)
                 );
         });
-
-		//also listen for and apply their movement updates when they emit those.
-		client.on('movementUpdate', data =>
-		{
-			//model orientation
-			model.position    .fromArray(data.position);
-            model.quaternion  .fromArray(data.quaternion);
-		});
 	});
 });
 
@@ -79,5 +79,6 @@ module.exports = {
 	}),
 	update: (entity, delta) =>
 	{
+		broadcast("currentSpeedsUpdate", currentSpeeds);
 	}
 }

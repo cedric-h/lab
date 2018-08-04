@@ -20,7 +20,7 @@ define(['../lib/three.js'], THREE =>
 	//ECS export
 	return {
 		//serverAndClient: true,
-		componentTypesAffected: ["movement"],
+		componentTypesAffected: ["movement", "movementControls"],
 		searchName: 'movementUpdate',
 		load: new Promise((resolve, reject) =>
 		{
@@ -71,9 +71,6 @@ define(['../lib/three.js'], THREE =>
 
 			if(movement.active)
 			{
-
-				//movement clientside prediction
-
 				//speed
 				//increase speed
 				movement.currentSpeed += (movement.maxSpeed/movement.secondsToMax) * delta;

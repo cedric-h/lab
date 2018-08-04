@@ -17,7 +17,8 @@
 			return {
 				dependents: [],
 				frictionOn: false,
-				gravityOn: 	true
+				friction:   undefined,
+				gravityOn: 	true,
 			};
 		}
 	}

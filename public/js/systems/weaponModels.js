@@ -2,6 +2,7 @@ define(['../lib/three.js'], function(THREE)
 {
 	//variable declaration
 	var weaponModels = {};
+	let arrows = {};
 
 
 	//assign that listener
@@ -15,6 +16,7 @@ define(['../lib/three.js'], function(THREE)
     	model.parent.add(weapon.model);
 
     	weapon.model.up.set(0, 0, 1);
+    	weapon.model.scale.multiply(model.scale);
 	});
 
 	entities.emitter.on('weaponRemove', entity =>

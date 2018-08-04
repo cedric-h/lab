@@ -6,13 +6,21 @@ module.exports = {
 	{
 		resolve();
 	}),
-	factory: function createPosition()
+	factory: () =>
 	{
 		return {
 			target: 		 undefined,
-			active: 		 false,
 			projectileCount: 0,
+			readied: 		 false,
+			readiedPosition: new THREE.Vector3(),
 			emitter: 		 new EventEmitter()
 		}
+	},
+	reset: combat =>
+	{
+		combat.target = undefined;
+
+		delete combat.emitter;
+		combat.emitter = new EventEmitter();
 	}
 };

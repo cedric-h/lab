@@ -28,7 +28,8 @@ class Client extends EventEmitter//analgous to "extends EventEmitter"
 
     		isOpen = false;
 
-    		this.ws.ping();
+            if(this.ws.readyState === 1)
+    		  this.ws.ping();
 
     		//if the ping above yields a pong, isOpen is set to true.
     		//if there's no pong before the next interval, then isOpen
@@ -59,8 +60,12 @@ module.exports = {
 	{
 		resolve();
 	}),
-	factory: function()
+	factory: () =>
 	{
 		return new Client();
-	}
+	},
+    reset: client =>
+    {
+        client.removeAllListeners();
+    }
 };

@@ -201,10 +201,8 @@ define(['../lib/three.js'], function(THREE)
 					position: 		model.position 	  .toArray(),
 					quaternion: 	model.quaternion  .toArray(),
 					//movement stuff
-					direction: 		movement.direction.toArray(),
-					currentSpeed: 	movement.currentSpeed,
-					active:     	movement.active
-				}
+					currentSpeed: 	movement.currentSpeed
+				};
 				server.emit('movementUpdate', moveControls.serverData);
 			}
 		}

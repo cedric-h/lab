@@ -60,7 +60,7 @@ define(['../lib/three.js'], function(THREE)
     entities.emitter.on('loaded', () =>
     {
         //when the server sends us players/enemiesToInstantiate, load those.
-        //these are the entities
+        //these are the entities that existed prior to the client logging in
         Promise.all(
             ['players', 'enemies'].map(modelSource =>
             {
@@ -68,7 +68,7 @@ define(['../lib/three.js'], function(THREE)
                     server.once(modelSource + "ToInstantiate", (entitiesData) =>
                     {
                         entitiesData.forEach(spawn);
-                        console.log('done!');
+                        server.emit('entitiesInstantiated');
                         resolve();
                     })
                 );

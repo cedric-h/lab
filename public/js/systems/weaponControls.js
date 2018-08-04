@@ -10,7 +10,7 @@ define(['../lib/three.js', '../util/closestEntity.js'], function(THREE, closestE
 				event.preventDefault();
 
 				let entity = entities.find('movementControls')[0];
-				let model 	  = entities.getComponent(entity, "model");
+				let model  = entities.getComponent(entity, "model");
 
 				let targets = entities.find('targetable');
 

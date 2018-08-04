@@ -13,7 +13,7 @@
 				enabled: 			true,
 				//data for handling getting things to the server
 				serverData: 		{},		//where the server thinks we are
-				updateServerEvery:  1/5, 	//number after the one is the FPS
+				updateServerEvery:  1/20, 	//number after the one is the FPS
 				//direction
 				keysDirection: 		new THREE.Quaternion(),
 				velocityOverride: 	new THREE.Vector3(),

@@ -25,6 +25,8 @@ const ECSbus = require('./ECSbus');
 let ecs 	 = ECSbus.ecs;
 let entities = ECSbus.entities;
 
+entities.emitter.setMaxListeners(150);
+
 
 //error handling
 process.on('unhandledRejection', err =>

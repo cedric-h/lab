@@ -8,7 +8,8 @@ module.exports = {
 	factory: function createPosition()
 	{
 		return {
-			
+			attackTimer: 	undefined,
+			attackCooldown: 3000
 		}
 	}
 };

@@ -45,6 +45,7 @@ define(['../lib/three.js'], function(THREE)
 		health.deplete.loop = THREE.LoopOnce;
 		health.deplete.clampWhenFinished = true;
 		health.deplete.play();
+		health.deplete.setEffectiveTimeScale(10);
 	}
 
 
@@ -61,7 +62,9 @@ define(['../lib/three.js'], function(THREE)
 	entities.emitter.on('targetedCreate', entity =>
 	{
 	    let model  = entities.getComponent(entity, 'model');
-	    model.getObjectByName('healthRing').material.color.setRGB(1, 0, 0);
+	    let healthRing = model.getObjectByName('healthRing');
+	    if(healthRing)
+	    	healthRing.material.color.setRGB(1, 0, 0);
 	});
 
 
@@ -92,51 +95,16 @@ define(['../lib/three.js'], function(THREE)
 	{
 		let entity = entityWithId(data.serverId);
 
-		if(entity)
+		if(entity !== undefined)
 		{
 			let health = entities.getComponent(entity, "health");
+
+			if(health.val === undefined)
+				addHealthRing(entity);
+			
 			health.val = data.val;
 		}
 	});
-
-
-	/*health ring popping out animation
-	deplete.stop();
-	deplete.play();
-	deplete.loop = THREE.LoopRepeat;
-	deplete.setEffectiveTimeScale(-1);
-
-	setTimeout(
-		() =>
-		{
-			console.log('here');
-			deplete.setEffectiveTimeScale(0.2);
-			deplete.loop = THREE.LoopOnce;
-
-			setTimeout(
-				() =>
-				{
-					deplete.setEffectiveTimeScale(1);
-					deplete.stop();
-					deplete.play();
-				},
-				3000
-			);
-		},
-		175
-	);*/
-
-	/*
-	*/
-
-	/*
-	let animation = entities.getComponent(ringEntity, "animation");
-
-	if(animation.initialized)
-	{
-		animation.mixer.update(delta);
-	}
-	*/
 
 
 	//ECS output
@@ -182,14 +150,19 @@ define(['../lib/three.js'], function(THREE)
 				//only play the animation if the two ratios are disproportionate
 				//for some reason the last 0.14 is of the bar going back to full,
 				//so go ahead and kill the thing at that point since they're out of health.
-				if((duration - deplete.time) < 0.14)
-				{
-					if(healthPercentage <= 0)
-						entities.destroy(entity);
-				}
+				if(healthPercentage <= 0)
+					entities.destroy(entity);
 
-				else if(healthPercentage < animationProgress)
-					health.mixer.update(delta);
+				else 
+				{
+					if(healthPercentage < animationProgress && (duration - deplete.time) > 0.14)
+						health.mixer.update(delta);
+
+					//if health percentage 10% or more behind animationProgress,
+					//restart the animation.
+					if(animationProgress - healthPercentage < -0.1)
+						deplete.reset().play();
+				}
 			}
 		}
 	}
