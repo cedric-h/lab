@@ -6,27 +6,21 @@ let entities = ECSbus.entities;
 //file system
 const fs = require('fs-extra');
 
+//three.js
+const THREE = require('three');
+
 //tiny helper scripts
 const broadcast = require('../broadcast.js');
 const closestEntity = require('../public/js/util/closestEntity.js');
 
 
-const getOrientationData = models =>
-{
-	let orientations = {};
-
-	models.forEach(entity =>
-	{
-		let model = entities.getComponent(entity, "model");
-
-		orientations[entity] = {
-			position: 	model.position	.toArray(),
-			quaternion: model.quaternion.toArray()
-		}
-	});
-
-	return orientations;
-}
+//variable declaration
+const delta         = new THREE.Vector3(0, 0, 0);
+const raycastOrigin = new THREE.Vector3(0, 0, 0);
+const down          = new THREE.Vector3(0, 0, -1);
+let results = [];
+const raycaster = new THREE.Raycaster();
+raycaster.far = 5.5;
 
 
 //ECS exports
@@ -37,44 +31,79 @@ module.exports = {
     {
         resolve();
     }),
-    update: (entity, delta) => 
+    update: (entity, timeDelta) => 
     {
         let model  = entities.getComponent(entity, "model");
         let combat = entities.getComponent(entity, "combat");
+        let weapon = entities.getComponent(entity, "weapon");
     	let ai     = entities.getComponent(entity, "ai");
 
 
         //find out who we'll be attacking
-        if(combat.target !== undefined)
+
+        if(combat.target === undefined)
         {
-            let targetModel = entities.getComponent(combat.target, "model");
-
-            //look at 'em
-    		model.rotation.z = Math.atan2(
-    			targetModel.position.y - model.position.y,
-    			targetModel.position.x - model.position.x
-    		);
-
-            //we have a target, so shoot if the timer is spent
-            if(ai.attackTimer === undefined || ai.attackTimer - Date.now() < 0)
-            {
-                ai.attackTimer = Date.now() + ai.attackCooldown;
-
-                combat.emitter.emit('launchAttack', {});
-            }
-	    }
-
-        else
-        {
-            let closestPlayer = closestEntity(
+            let closestPlayerEntity = closestEntity(
                 model.position,
                 entities.find('client').filter(
                     entity => entities.getComponent(entity, "model")
                 )
             );
 
-            if(closestPlayer !== undefined)
-                combat.emitter.emit('newTarget', closestPlayer);
+            if(closestPlayerEntity !== undefined)
+            {
+                combat.emitter.emit('toggleAttackOn', {
+                    target: closestPlayerEntity
+                });
+            }
+	    }
+
+        if(combat.target !== undefined)
+        {
+            let targetModel = entities.getComponent(combat.target, "model");
+
+            //look at and move towards them.
+            delta.x = targetModel.position.x - model.position.x;
+            delta.y = targetModel.position.y - model.position.y;
+            //rotation
+            model.rotation.z = Math.atan2(delta.y, delta.x);
+            //position
+            if(!combat.withinRange && weapon.type === "melee" && !ai.movementBlocked)
+            {
+                let map = entities.getComponent(entities.find('environment')[0], "model");
+
+                delta.normalize();
+                delta.multiplyScalar(ai.speed * timeDelta);
+                raycastOrigin.addVectors(delta, model.position);
+                raycastOrigin.z += 5;
+
+                raycaster.set(
+                    raycastOrigin,
+                    down
+                );
+                raycaster.intersectObject(
+                    map,
+                    true,
+                    results
+                );
+
+                if(results.length > 0)
+                {
+                    model.position.copy(results[0].point)
+
+                    results = [];
+                }
+
+                else
+                {
+                    model.position.z -= 4 * timeDelta;
+                }
+            }
         }
     }
 };
+
+
+//buggos
+//second player unable to correctly fire weapon or target enemies. generally unreliable.
+//third player to join unable to be seen by second player. fourth player joining caused third to crash.

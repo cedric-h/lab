@@ -29,7 +29,6 @@ define(['../lib/three.js'], function(THREE)
 
 	//ECS output
 	return {
-		componentTypesAffected: ['shooting', 'model'],
 		load: new Promise((resolve, reject) =>
 		{
 			server.once('meshLocations', meshLocations =>
@@ -39,8 +38,8 @@ define(['../lib/three.js'], function(THREE)
 
 				meshLocations.forEach(meshLocation =>
 				{
-					let path = meshLocation + '.json';
-					let name = meshLocation.split('/')[3];
+					let path   = meshLocation + '.json';
+					let name   = meshLocation.split('/')[3];
 					let folder = meshLocation.split('/')[2];
 
 					if(folder === "weapons")

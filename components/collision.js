@@ -14,15 +14,17 @@ module.exports = {
 	factory: () =>
 	{
 		return {
-			lastPos: undefined,
-			emitter: new EventEmitter(),
-			target:  undefined
+			lastPos: 	undefined,
+			target:  	undefined,
+			emitter: 	new EventEmitter(),
+			offset: 	new THREE.Vector3(0, 0, 0)
 		};
 	},
 	reset: collision =>
 	{
 		collision.emitter.removeAllListeners('hit');
-		collision.lastPos = undefined;
-		collision.target  = undefined;
+		collision.lastPos   = undefined;
+		collision.target    = undefined;
+		collision.offset.set(0, 0, 0);
 	}
 };

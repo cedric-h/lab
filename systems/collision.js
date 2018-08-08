@@ -33,6 +33,11 @@ module.exports = {
             map = loader.parse(JSON.parse(data));
             map.updateMatrixWorld(true);
 
+            let mapEntity = entities.create();
+            entities.addComponent(mapEntity, "model");
+            entities.entities[mapEntity].model = map;
+            entities.addComponent(mapEntity, "environment");
+
             resolve();
         });
     }),
@@ -44,7 +49,7 @@ module.exports = {
         if(collision.lastPos === undefined)
             collision.lastPos = model.position.clone();
 
-        else if(entities.find('model').indexOf(collision.target) !== -1)
+        else if(entities.find('model').indexOf(collision.target) !== -1 || collision.target === "map")
         {
             raycaster.set(
                 model.position,
@@ -52,14 +57,17 @@ module.exports = {
             );
             raycaster.far = model.position.distanceTo(collision.lastPos) + 0.5;
 
-            let targetModel = entities.getComponent(collision.target, "model");
-            targetModel.updateMatrixWorld();
+            if(collision.target !== "map")
+            {
+                let targetModel = entities.getComponent(collision.target, "model");
+                targetModel.updateMatrixWorld();
 
-            raycaster.intersectObject(
-                targetModel,
-                false,
-                results
-            );
+                raycaster.intersectObject(
+                    targetModel,
+                    false,
+                    results
+                );
+            }
 
             if(results.length > 0)
                 collision.emitter.emit('hit', 'target');

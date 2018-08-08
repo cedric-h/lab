@@ -1,33 +1,9 @@
 {
 	"angryBoi": {
 		"spawns": [
-			{
-				"position": [10,	0, 		0],
-				"scaleVariance": [1.75, 1.75],
-				"weapon": "bow",
-				"health": 15
-			},
-			{
-				"position": [10,	-2, 	0]
-			},
-			{
-				"position": [10,	2, 		0]
-			},
-			{
-				"position": [8,		1, 		0]
-			},
-			{
-				"position": [8,		-1, 	0]
-			},
-			{
-				"position": [12,	1, 		0]
-			},
-			{
-				"position": [12,	-1, 	0]
-			}
 		],
-		"scaleVariance": [1, 0.95],
-		"health": 9,
+		"scaleVariance": [1.1, 0.9],
+		"health": 5,
 		"weapon": "club"
 	}
 }

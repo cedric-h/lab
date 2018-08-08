@@ -22,7 +22,7 @@ define(['../lib/three.js'], function(THREE)
 		let animation = entities.getComponent(entity, "animation");
 
 		//grab the readying animation from the model's data
-		let readyClip = THREE.AnimationClip.findByName(model.geometry.animations, "shoot");
+		let readyClip = THREE.AnimationClip.findByName(model.geometry.animations, weapon.type);
 
 		if(readyClip)
 		{
@@ -98,7 +98,21 @@ define(['../lib/three.js'], function(THREE)
 	});
 
 
-	//event listeners for aiming
+	//event listeners on server for animations
+
+	//melee
+	server.on('meleeAttack', attackerServerId =>
+	{
+		let attackerEntity = entityWithId(attackerServerId);
+
+		if(attackerEntity)
+		{
+			let weapon = entities.getComponent(attackerEntity, 'weapon');
+			weapon.animation.reset().play();
+		}
+	});
+
+	//ranged
 	server.on('aimWeaponAt', data =>
 	{
 		let attackerEntity = entityWithId(data.attackerEntity);
@@ -111,20 +125,28 @@ define(['../lib/three.js'], function(THREE)
 			weapon.targetPosUpdated = true;
 		}
 	});
-
 	server.on('targetingUpdate', data =>
 	{
 		let attackerEntity = entityWithId(data.attackerEntity);
 
 		if(attackerEntity !== undefined)
 		{
-			let weapon = entities.getComponent(attackerEntity, "weapon");
+			let weapon   = entities.getComponent(attackerEntity, "weapon");
+			let movement = entities.getComponent(attackerEntity, "movement");
 
 			weapon.targetEntity = entityWithId(data.targetEntity);
 			weapon.targetPosUpdated = false;
+
+			if(attackerEntity === entities.find('movementControls')[0])
+			{
+				movement.faceTowardsEntity = weapon.targetEntity;
+				movement.directionOverride = true;
+			}
 		}
 	});
 
+
+	//clear out targetEntities if the entity dies
 	entities.emitter.on('modelRemove', removedModelEntity =>
 	{
 		entities.find('weapon').forEach(weaponEntity =>
@@ -178,12 +200,13 @@ define(['../lib/three.js'], function(THREE)
 				}
 			}
 		})
-	})
+	});
 	
 
 	//ECS output
 	return {
 		componentTypesAffected: ['weapon', 'model'],
+		searchName: ['weaponsToAnimate'],
 		load: new Promise((resolve, reject) =>
 		{
 			resolve();
@@ -193,7 +216,7 @@ define(['../lib/three.js'], function(THREE)
 			let weapon 			 = entities.getComponent(entity, "weapon");
 			let movementControls = entities.getComponent(entity, "movementControls");
 
-			if(!weapon.isMoving)
+			if(weapon.type === "ranged" && !weapon.isMoving)
 			{
 				let animation = entities.getComponent(entity, "animation");
 
@@ -235,7 +258,11 @@ define(['../lib/three.js'], function(THREE)
 					if(movementControls)
 					{
 						setTimeout(
-							() => movementControls.blocked = false,
+							() =>
+							{
+								movementControls.blocked = false;
+								entities.getComponent(entity, "movement").directionOverride = false;
+							},
 							weapon.animation.getClip().duration * 1000 * 0.2
 						)
 					}

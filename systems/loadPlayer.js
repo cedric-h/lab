@@ -45,7 +45,6 @@ entities.emitter.on('clientCreate', entity =>
 
 //ECS exports
 module.exports = {
-	componentTypesAffected: ["client"],
 	load: new Promise((resolve, reject) =>
 	{
         //get the names of the files that the clients will need to load.

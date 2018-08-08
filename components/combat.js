@@ -12,15 +12,19 @@ module.exports = {
 			target: 		 undefined,
 			projectileCount: 0,
 			readied: 		 false,
+			readying: 		 false,
+			attackOn: 		 false,
+			withinRange: 	 false,
+			lastAttackDate:  undefined,
 			readiedPosition: new THREE.Vector3(),
 			emitter: 		 new EventEmitter()
 		}
 	},
 	reset: combat =>
 	{
-		combat.target = undefined;
+		combat.target	 = undefined;
+		combat.attackOn  = false;
 
-		delete combat.emitter;
-		combat.emitter = new EventEmitter();
+		combat.emitter.removeAllListeners();
 	}
 };

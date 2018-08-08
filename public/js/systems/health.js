@@ -30,10 +30,7 @@ define(['../lib/three.js'], function(THREE)
 		model.position.z += 0.06;
 
 		if(entities.getComponent(entity, "targetable"))
-		{
-			health.shouldRingRotate = false;
 			model.material.color.setRGB(1, 1, 0);
-		}
 
 		entities.getComponent(entity, "model").add(model);
 
@@ -45,9 +42,30 @@ define(['../lib/three.js'], function(THREE)
 		health.deplete.loop = THREE.LoopOnce;
 		health.deplete.clampWhenFinished = true;
 		health.deplete.play();
-		health.deplete.setEffectiveTimeScale(10);
+		health.deplete.setEffectiveTimeScale(5);
 	}
 
+
+	entities.emitter.on('healthCreate', entity =>
+	{
+		let model  = entities.getComponent(entity, "model");
+
+		if(model !== undefined)
+			addHealthRing(entity);
+
+		else
+			entities.emitter.on('modelCreate', function addRingOnModelCreate(createdModelEntity)
+			{
+				if(entity === createdModelEntity)
+				{
+					new Promise(resolve => resolve()).then(() =>
+					{
+						addHealthRing(entity);
+						entities.emitter.removeListener('modelCreate', addRingOnModelCreate);
+					});
+				}
+			})
+	});
 
 	//make the rings of entities that aren't targeted anymore go back to yellow
 	entities.emitter.on("targetedRemove", entity =>
@@ -77,15 +95,7 @@ define(['../lib/three.js'], function(THREE)
 			let serverId = entities.getComponent(entity, "serverId");
 			
 			if(health && data[serverId])
-			{
-				entities.entities[entity].health = data[serverId];
-
-				let model  = entities.getComponent(entity, "model");
-				let health = entities.getComponent(entity, "health");
-
-				if(!model.getObjectByName("healthRing"))
-					addHealthRing(entity);
-			}
+				Object.assign(entities.entities[entity].health, data[serverId]);
 		});
 	});
 
@@ -98,9 +108,6 @@ define(['../lib/three.js'], function(THREE)
 		if(entity !== undefined)
 		{
 			let health = entities.getComponent(entity, "health");
-
-			if(health.val === undefined)
-				addHealthRing(entity);
 			
 			health.val = data.val;
 		}
@@ -134,22 +141,23 @@ define(['../lib/three.js'], function(THREE)
 		update: (entity, delta) =>
 		{
 			let health = entities.getComponent(entity, "health");
+			let healthPercentage = health.val/health.max;
 
-			if(health.mixer !== undefined)
+			//if the animation has loaded and we've gotten health data for them from the server
+			if(health.mixer !== undefined && !isNaN(healthPercentage))
 			{
 				let model = entities.getComponent(entity, "model");
 				let ring = model.getObjectByName('healthRing');
 
-				let deplete  = health.deplete;
-				let duration = deplete.getClip().duration;
+				//animation variables
+				let deplete           = health.deplete;
+				let duration          = deplete.getClip().duration;
 				let animationProgress = (duration - deplete.time)/duration;
-				let healthPercentage  = health.val/health.max;
 
 				ring.rotation.z += ringRotationSpeed*(1 - Math.max(healthPercentage, 0));
 
 				//only play the animation if the two ratios are disproportionate
-				//for some reason the last 0.14 is of the bar going back to full,
-				//so go ahead and kill the thing at that point since they're out of health.
+				//for some reason the last 0.14 is of the bar going back to full, just pause then.
 				if(healthPercentage <= 0)
 					entities.destroy(entity);
 

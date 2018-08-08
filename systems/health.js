@@ -56,7 +56,6 @@ module.exports = {
                 val: health.val
             });
 
-            //the .dying flag is to make sure you don't set multiple timeouts to kill the thing.
             if(health.val <= 0)
                 entities.destroy(entity);
 

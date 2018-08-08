@@ -37,7 +37,7 @@
         "faces":6
     },
     "animations":[{
-        "name":"attack",
+        "name":"melee",
         "length":1.83333,
         "fps":60,
         "hierarchy":[{
@@ -4506,7 +4506,7 @@
             "parent":6
         }]
     },{
-        "name":"shoot",
+        "name":"ranged",
         "length":0.416667,
         "fps":60,
         "hierarchy":[{

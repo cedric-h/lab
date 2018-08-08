@@ -30,7 +30,9 @@
 						}
 
 						catch(error)
-							{};
+						{
+
+						};
 
 						//you can now use that search keyword (i.e. with entities.find())
 						//to get all entities that have all of the componentTypesAffected.
@@ -54,8 +56,8 @@
 						{
 							if(system.componentTypesAffected)
 							{
-								if(system.searchName === undefined && system.componentTypesAffected > 0)
-									throw new Error("searchName is required when more than one componentTypesAffected are present.");
+								if(system.searchName === undefined && system.componentTypesAffected.length > 0)
+									throw new Error(system.name + ": searchName is required when more than one componentTypesAffected are present.");
 								
 								let searchName = system.searchName || system.componentTypesAffected[0];
 								ecs.addEach(system.update, searchName);

@@ -97,6 +97,11 @@ module.exports = {
                     let weapon  = entities.getComponent(enemyEntity, "weapon");
                     weapon.name = enemy.weapon || enemyType.weapon;
                     entities.emitter.emit('weaponEquip', enemyEntity);
+                    setImmediate(() =>
+                    {
+                        if(weapon.type === 'melee')
+                            entities.addComponent(enemyEntity, 'collider')
+                    });
 
                     //health
         			let health = entities.getComponent(enemyEntity, 'health');

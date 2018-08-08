@@ -1,8 +1,15 @@
 {
 	"club": {
-		"type": "melee"
+		"type":  		"melee",
+
+		"reach": 		1.75,
+		"damage": 		3,
+		"knockback":	1,
+
+		"cooldown":		2000,
+		"hitTime":		365
 	},
 	"bow": {
-		"type": "ranged"
+		"type": 		"ranged"
 	}
 }

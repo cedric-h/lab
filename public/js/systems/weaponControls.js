@@ -1,16 +1,30 @@
 define(['../lib/three.js', '../util/closestEntity.js'], function(THREE, closestEntity)
 {
+	entities.emitter.on('targetedRemove', removedModelEntity =>
+	{
+		let movement = entities.getComponent(
+			entities.find('movementControls')[0], 
+			'movement'
+		);
+
+		if(movement.faceTowardsEntity === removedModelEntity)
+		{
+			movement.faceTowardsEntity = undefined;
+			movement.directionOverride = false;
+		}
+	});
+
 	entities.emitter.on('movementControlsCreate', () =>
 	{
 		//do stuff when the mouse is clicked.
 		window.addEventListener('keydown', event =>
 		{
-			if(event.key === "Tab")
+			if(event.key === "1")
 			{
 				event.preventDefault();
 
-				let entity = entities.find('movementControls')[0];
-				let model  = entities.getComponent(entity, "model");
+				let entity 	 = entities.find('movementControls')[0];
+				let model  	 = entities.getComponent(entity, "model");
 
 				let targets = entities.find('targetable');
 
@@ -31,13 +45,10 @@ define(['../lib/three.js', '../util/closestEntity.js'], function(THREE, closestE
 					entities.addComponent(targetEntity, "targeted");
 
 					//tell server
-					server.emit('newTarget', entities.getComponent(targetEntity, "serverId"));
+					server.emit('toggleAttackOn', {
+						target: entities.getComponent(targetEntity, "serverId")
+					});
 				}
-			}
-
-			if(event.key === "1")
-			{
-				server.emit('launchAttack', {});
 			}
 		});
 	});

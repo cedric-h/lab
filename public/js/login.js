@@ -92,13 +92,23 @@ requirejs(['js/websocketsWrapperClient.js', '/js/lib/ecs/index.js', "/js/lib/thr
 
 	    //map
 	    let map = entities.create();
-	    //configuring the components that were just added
 	    //set model name
 	    entities.addComponent(map, "modelName");
 	    entities.setComponent(map, "modelName", 'testRoom');
 	    //create things that use modelName
 	    entities.addComponent(map, "model");
 	    entities.addComponent(map, "collidable");
+
+
+	    //lever
+	    let lever = entities.create();
+	    //set model name
+		entities.addComponent(lever, "modelName");
+	    entities.setComponent(lever, "modelName", 'lever');
+	    //create things that use modelName
+	    entities.addComponent(lever, "model");
+	    let model = entities.getComponent(lever, 'model');
+	    model.position.set(17, 0, 0);
 
 
 	    //phew, done loading :D

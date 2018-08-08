@@ -12,6 +12,15 @@ class Client extends EventEmitter//analgous to "extends EventEmitter"
     	this.ws = ws;
 
 
+        //error handling
+        this.ws.on('error', error =>
+        {
+            console.log('ws Error!');
+            console.log(error.code);
+            console.log(error);
+        });
+
+
     	//TODO: collapse this into one interval for all connections
     	//terminate the connection if they don't respond to a ping in 30 seconds
     	let isOpen = true;
@@ -24,7 +33,7 @@ class Client extends EventEmitter//analgous to "extends EventEmitter"
     			clearInterval(heartbeat);
 
     		if(!isOpen)
-    			this.ws.close(408, 'ping timeout');
+    			this.ws.close(1000, 'ping timeout');
 
     		isOpen = false;
 

@@ -4300,7 +4300,7 @@
             "parent":18
         }]
     },{
-        "name":"shoot",
+        "name":"ranged",
         "length":0.416667,
         "fps":60,
         "hierarchy":[{

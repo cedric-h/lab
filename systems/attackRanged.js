@@ -28,9 +28,6 @@ function rangedAttack(attackerEntity, targetPos)
     //target components
     let targetModel = entities.getComponent(combat.target, "model");
 
-    //record the firing of this new projectile     
-    combat.projectileCount++;
-
     //modify where the arrow will go with some juicy randomness
     if(targetPos === undefined)
     {
@@ -60,12 +57,14 @@ function rangedAttack(attackerEntity, targetPos)
     });
 
     let targetAtTimeOfFiring = combat.target;
-    let hasLoweredProjectileCount = false;
 
     //wait a bit, then fire the arrow
     setTimeout(
         () =>
         {
+            if(!combat.readied)
+                return;
+
             //get the arrow set up
             let arrowEntity = entities.create();
             //add components
@@ -108,21 +107,7 @@ function rangedAttack(attackerEntity, targetPos)
                     broadcast('entityDespawn', arrowEntity);
                 },
                 15000
-            )
-
-            let lowerProjectileCount = setTimeout(
-                () =>
-                {
-                    if(combat)
-                    {
-                        if(!hasLoweredProjectileCount)
-                            combat.projectileCount--;
-
-                        hasLoweredProjectileCount = true;
-                    }
-                },
-                1000
-            )
+            );
 
             //let the attacker know about the new arrow
             broadcast('entitySpawn', {
@@ -145,11 +130,6 @@ function rangedAttack(attackerEntity, targetPos)
                 if(hitType === "target")
                     setImmediate(() =>
                     {
-                        if(!hasLoweredProjectileCount)
-                            combat.projectileCount--;
-
-                        hasLoweredProjectileCount = true;
-
                         //in case the target died while the arrow was flying.
                         if(entities.find('health').indexOf(targetAtTimeOfFiring) !== -1)
                         {
@@ -163,8 +143,6 @@ function rangedAttack(attackerEntity, targetPos)
                         broadcast('entityDespawn', arrowEntity);
 
                         clearTimeout(arrowDespawnTimeout);
-                        clearTimeout(lowerProjectileCount);
-                        collision.emitter.removeListener("hit", dealDamage);
                     });
 
                 else if(hitType === "map")

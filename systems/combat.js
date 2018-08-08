@@ -19,18 +19,16 @@ var preparationTimes = {};
 
 //helper functions
 const shouldFire = entity =>
-{	
+{
 	let combat = entities.getComponent(entity, "combat");
 	let health = entities.getComponent(entity, "health");
 
 	return (
 		health.val > 0											&&
-		combat.readied											&&
 		combat.target !== undefined 						   	&&
 		entities.find('health').indexOf(combat.target) !== -1 	&&
 		entities.getComponent(combat.target, "health").val > 0 	&&
-		entities.find('model' ).indexOf(combat.target) !== -1   &&
-		combat.projectileCount < 8
+		entities.find('model' ).indexOf(combat.target) !== -1
 	);
 }
 
@@ -64,18 +62,6 @@ entities.emitter.on('combatCreate', entity =>
 			let targetModel   = entities.getComponent(combat.target, "model");
 			let attackerModel = entities.getComponent(entity,        "model");
 
-			if(client)
-				client.send(
-					'faceTowards',
-					new THREE.Quaternion().setFromEuler(
-						new THREE.Euler(0, 0, Math.atan2(
-								targetModel.position.y - attackerModel.position.y,
-								targetModel.position.x - attackerModel.position.x
-							)
-						)
-					).toArray()
-				);
-
 			broadcast('targetingUpdate', {
 				attackerEntity: entity,
 				targetEntity: 	combat.target
@@ -84,7 +70,8 @@ entities.emitter.on('combatCreate', entity =>
 			setTimeout(
 				() =>
 				{
-					combat.readied = true;
+					combat.readied  = true;
+					combat.readying = false;
 					combat.readiedPosition.copy(attackerModel.position);
 				},
 				preparationTimes['shoot'] * 1000
@@ -92,43 +79,57 @@ entities.emitter.on('combatCreate', entity =>
 		}
 	});
 
-	combat.emitter.on('launchAttack', attackData =>
+	combat.emitter.on('toggleAttackOn', attackData =>
 	{
-		if(shouldFire(entity))
+		let weapon = entities.getComponent(entity, "weapon");
+
+		if(weapon.type === "ranged" && !combat.attackOn)
 		{
-			//attacker components
-			let combat 		= entities.getComponent(entity, "combat");
-			let attackerModel = entities.getComponent(entity, "model");
-
-			//make sure the target hasn't already been killed
-			let targetModel = entities.getComponent(combat.target, "model");
-			let direction = Math.atan2(
-				targetModel.position.y - attackerModel.position.y,
-				targetModel.position.x - attackerModel.position.x
-			);
-
-			//check to see if they're in the right position until they are, then shoot.
-			(function positionCheck()
+			combat.attackOn = true;
+			combat.readying = true;
+			combat.emitter.emit('newTarget', attackData.target);
+			
+			(function fireArrowIfShould()
 			{
-				//get new attackermodel, with updated position
-				if(entity !== undefined && entities.find('model').indexOf(entity) !== -1)
+				if(
+					entities.find('combat').indexOf(entity) === -1 ||
+					!shouldFire(entity) ||
+					(
+						!combat.readying &&
+						!combat.readied
+					)
+				)
+					combat.attackOn = false;
+
+				else
 				{
+					//attacker components
+					let combat 		  = entities.getComponent(entity, "combat");
 					let attackerModel = entities.getComponent(entity, "model");
+
+					let targetModel = entities.getComponent(combat.target, "model");
+					let direction = Math.atan2(
+						targetModel.position.y - attackerModel.position.y,
+						targetModel.position.x - attackerModel.position.x
+					);
 					let attackerDirection = attackerModel.rotation.z;
 
-					if(shouldFire(entity))
-					{
-						if(
-							attackerDirection < direction + 0.09 &&
-							attackerDirection > direction - 0.09
-						)
-							combat.emitter.emit('launchRangedAttack');//see rangedAttack.js
+					if(
+						attackerDirection < direction + 0.09 &&
+						attackerDirection > direction - 0.09
+					)
+						combat.emitter.emit('launchRangedAttack');
+						//see attackRanged.js
 
-						else
-							setTimeout(positionCheck, 100);
-					}
+					setTimeout(fireArrowIfShould, 500 + (Math.random()*32)*(Math.random()*32));
 				}
 			})();
+		}
+
+		else if(weapon.type === "melee")
+		{
+			combat.emitter.emit('newTarget', attackData.target);
+			combat.attackOn = true;
 		}
 	});
 });
@@ -157,8 +158,7 @@ entities.emitter.on('clientCreate', entity =>
 
 	//transfer client events to combat.emitter
 	[
-		'launchAttack',
-		'newTarget'
+		'toggleAttackOn'
 	].forEach(eventName =>
 	{
 		let transferEvent = data =>

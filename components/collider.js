@@ -5,11 +5,10 @@ module.exports = {
 	{
 		resolve();
 	}),
-	factory: function createPosition()
+	factory: () =>
 	{
 		return {
-			speed: 4,
-			movementBlocked: false
+			radius: 1
 		}
 	}
 };

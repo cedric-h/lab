@@ -11,15 +11,17 @@
 		factory: () =>
 		{
 			return {
-				val: 	undefined,
-				max: 	undefined,
-				dying: 	false,
+				val: 		undefined,
+				max: 		undefined,
+				mixer: 		undefined,
+				deplete: 	undefined
 			}
 		},
 		reset: health =>
 		{
-			health.val = undefined;
-			health.dying = false;
+			health.val 	   = undefined;
+			health.mixer   = undefined;
+			health.deplete = undefined;
 		}
 	}
 
