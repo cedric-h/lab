@@ -26,8 +26,8 @@ const getPlayerData = function(entity)
 			"model"
 		],
 		componentOverrides: {
-			serverId: entity,
-			modelName: "player"
+			serverId: 	entity,
+			modelName: 	"player"
 		},
 		weaponName: weapon.name
 	}

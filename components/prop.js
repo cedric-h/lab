@@ -5,11 +5,11 @@ module.exports = {
 	{
 		resolve();
 	}),
-	factory: () =>
+	factory: function createPosition()
 	{
 		return {
-			speed: 4,
-			movementBlocked: false
+			title: undefined,
+			body:  undefined
 		}
 	}
 };

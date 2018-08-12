@@ -1,6 +1,7 @@
 define(['../lib/three.js'], function(THREE)
 {
 	var serverUpdateCounter = 0;
+	var gravityOnTimeout;
 
 	//function that manipulates keyMap
 	const updateKeyMap = event =>
@@ -59,9 +60,8 @@ define(['../lib/three.js'], function(THREE)
 	//clientside prediction against noclipping.
 	//this will be enforced on the server as well, but without this
 	//the walls will feel mushy because the server will have to teleport you out repeatedly. 
-	function handleWallCollisions(collisions)
+	function handleWallCollisions(collisions, entity)
 	{
-		let entity = entities.find("movementControls")[0];
 		let velocityParameters = entities.getComponent(entity, "velocityParameters");
 		let velocity 		   = entities.getComponent(entity, "velocity");
 		let model 	 	 	   = entities.getComponent(entity, "model");
@@ -75,8 +75,7 @@ define(['../lib/three.js'], function(THREE)
 		collisions.forEach(collision =>
 		{
 			if(filteredCollisions.every(x => x.faceIndex !== collision.faceIndex))
-				//if(collision.length < 0.8)
-					filteredCollisions.push(collision);
+				filteredCollisions.push(collision);
 
 			//if collision with this face has already been recorded
 			else
@@ -107,10 +106,15 @@ define(['../lib/three.js'], function(THREE)
 					entities.getComponent(thingToTeleport, "model").position.sub(teleportationVector)
 				);
 			});
-
-			//kill their velocity
-			velocity.set(0, 0, 0);
 		}
+
+		//we hit something! turn off gravity!
+		velocityParameters.gravityOn = false;
+		clearTimeout(gravityOnTimeout);
+		gravityOnTimeout = setTimeout(
+			() => velocityParameters.gravityOn = true,
+			1000
+		);
 
 
 		//do the collision differently, if collision is detected still teleport them out but
@@ -162,16 +166,7 @@ define(['../lib/three.js'], function(THREE)
 		});
 
 		//assign handleWallCollisions
-		hitbox.emitter.on('collision', handleWallCollisions);
-		
-		hitbox.emitter.on('enter', () =>
-		{
-			entities.getComponent(entity, "velocityParameters").gravityOn = false;
-		});
-		hitbox.emitter.on('exit', () =>
-		{
-			entities.getComponent(entity, "velocityParameters").gravityOn = true;
-		});
+		hitbox.emitter.on('collision', collisions => handleWallCollisions(collisions, entity));
 	});
 
 

@@ -33,53 +33,56 @@ function updateWithinRange(attackerEntity)
 
 function shouldAttack(attackerEntity)
 {
-    //attacker components
-    let combat        = entities.getComponent(attackerEntity, "combat");
-    let weapon        = entities.getComponent(attackerEntity, "weapon");
-    let attackerModel = entities.getComponent(attackerEntity, "model");
-
-    if(entities.find('model').indexOf(combat.target) !== -1)
+    if(entities.find('model').indexOf(attackerEntity) !== -1)
     {
-        //target components
-        let targetModel = entities.getComponent(combat.target, "model");
+        //attacker components
+        let combat        = entities.getComponent(attackerEntity, "combat");
+        let weapon        = entities.getComponent(attackerEntity, "weapon");
+        let attackerModel = entities.getComponent(attackerEntity, "model");
 
-        updateWithinRange(attackerEntity);
+        if(entities.find('model').indexOf(combat.target) !== -1)
+        {
+            //target components
+            let targetModel = entities.getComponent(combat.target, "model");
 
-        let direction = Math.atan2(
-            targetModel.position.y - attackerModel.position.y,
-            targetModel.position.x - attackerModel.position.x
-        );
-        let attackerDirection = attackerModel.rotation.z;
+            updateWithinRange(attackerEntity);
 
-        return (
-            attackerDirection < direction + 0.09 &&
-            attackerDirection > direction - 0.09 &&
-            combat.withinRange
-        );
+            let direction = Math.atan2(
+                targetModel.position.y - attackerModel.position.y,
+                targetModel.position.x - attackerModel.position.x
+            );
+            let attackerDirection = attackerModel.rotation.z;
+
+            return (
+                !combat.isSwinging                   &&
+                attackerDirection < direction + 0.09 &&
+                attackerDirection > direction - 0.09 &&
+                combat.withinRange
+            );
+        }
     }
 }
 
 function meleeAttack(attackerEntity)
 {
     //attacker components
-    let combat        = entities.getComponent(attackerEntity, "combat");
-    let weapon        = entities.getComponent(attackerEntity, "weapon");
-    let client        = entities.getComponent(attackerEntity, "client");
-    let attackerModel = entities.getComponent(attackerEntity, "model");
-    //target components
-    let health      = entities.getComponent(combat.target,  "health");
-    let targetModel = entities.getComponent(combat.target,  "model");
+    let combat = entities.getComponent(attackerEntity, "combat");
+    let weapon = entities.getComponent(attackerEntity, "weapon");
 
     if(shouldAttack(attackerEntity))
     {
         broadcast('meleeAttack', attackerEntity);
+        
         combat.lastAttackDate = Date.now();
+        combat.isSwinging = true;
 
         setTimeout(
             () =>
             {
+                combat.isSwinging = false;
+
                 if(shouldAttack(attackerEntity))
-                    health.val -= weapon.damage;
+                    entities.getComponent(combat.target, "health").val -= weapon.damage;
             },
             weapon.hitTime
         );
@@ -89,7 +92,7 @@ function meleeAttack(attackerEntity)
 
 //event listeners
 entities.emitter.on('combatCreate', entity =>
-{
+{   
     let combat = entities.getComponent(entity, "combat");
 
 

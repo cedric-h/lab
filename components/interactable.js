@@ -1,15 +1,15 @@
 const THREE = require('three');
+const EventEmitter = require('events');
 
 module.exports = {
 	load: new Promise((resolve, reject) =>
 	{
 		resolve();
 	}),
-	factory: () =>
+	factory: function createPosition()
 	{
 		return {
-			speed: 4,
-			movementBlocked: false
+			emitter: new EventEmitter()
 		}
 	}
 };

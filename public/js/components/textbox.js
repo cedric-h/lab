@@ -8,9 +8,10 @@ define(['../lib/three.js'], (THREE) =>
 		factory: () =>
 		{
 			return {
-				mixer: 		 undefined,
-				initialized: false,
-				active: 	 true
+				title: 				'...',
+				body: 				'hi there! I',
+				appearDistance: 	5,
+				zoomDistance:       0.5
 			}
 		},
 		reset: animation =>

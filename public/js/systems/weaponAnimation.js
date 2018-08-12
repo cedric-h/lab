@@ -26,7 +26,7 @@ define(['../lib/three.js'], function(THREE)
 
 		if(readyClip)
 		{
-			weapon.animation = animation.mixer.clipAction(readyClip);
+			weapon.animation = animation.mixer.clipAction(readyClip, model);
 
 			//configure the readying animation
 			weapon.animation.loop = THREE.LoopOnce;
@@ -38,18 +38,20 @@ define(['../lib/three.js'], function(THREE)
 	//prepare weapon animations when a weapon is equipped
 	entities.emitter.on('weaponEquip', entity =>
 	{
-		if(!entities.getComponent(entity, "weapon").animation)
-		{
-			let animation = entities.getComponent(entity, "animation");
+		let animation = entities.getComponent(entity, "animation");
 
-			if(animation.initialized)
-				prepareAnimation(entity);
+		if(animation.initialized)
+			prepareAnimation(entity);
 
-			else
-				new Promise(resolve => resolve()).then(() =>
+		else
+			entities.emitter.on('animationInit', function prepareOnInit(animationInitEntity)
+			{
+				if(animationInitEntity === entity)
+				{
 					prepareAnimation(entity)
-				);
-		}
+					entities.emitter.removeListener('animationInit', prepareOnInit);
+				}
+			});
 	});
 
 

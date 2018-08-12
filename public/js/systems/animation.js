@@ -1,3 +1,4 @@
+
 define(['../lib/three.js'], function(THREE)
 {
 	//helper functions
@@ -18,7 +19,7 @@ define(['../lib/three.js'], function(THREE)
 		let animation = entities.getComponent(entity, "animation");
 		let model = entities.getComponent(entity, "model");
 
-		if(model)
+		if(model !== undefined)
 			initializeAnimation(entity);
 
 		else

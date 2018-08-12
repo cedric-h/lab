@@ -1,0 +1,12 @@
+{
+	"enabled": true,
+	"angryBoi": {
+		"spawns": [
+			{"position": [10, 	0,	0]}, {"position": [10,	2,	0]}, {"position": [10,	-2,	0]},
+			{"position": [8,	0, 	0]}, {"position": [8,	2, 	0]}, {"position": [8,	-2,	0]}
+		],
+		"scaleVariance": [0.75, 1.25],
+		"health": 1,
+		"weapon": "bow"
+	}
+}

@@ -39,6 +39,12 @@ entities.emitter.on('clientCreate', entity =>
         entities.addComponent(entity, "weapon");
         entities.getComponent(entity, "weapon").name = "bow";
         entities.emitter.emit('weaponEquip', entity);
+
+        //temp debugging/formation file making thing
+        client.on('printPosition', () =>
+        {
+            console.log(entities.getComponent(entity, 'model').position)
+        });
     });
 });
 

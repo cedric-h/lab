@@ -25,8 +25,8 @@ raycaster.far = 5.5;
 
 //ECS exports
 module.exports = {
-    componentTypesAffected: ['model', 'attackable', 'ai'],
-    searchName: "enemy",
+    componentTypesAffected: ['ai'],
+    searchName: "ai",
     load: new Promise((resolve, reject) =>
     {
         resolve();
@@ -95,15 +95,8 @@ module.exports = {
                 }
 
                 else
-                {
                     model.position.z -= 4 * timeDelta;
-                }
             }
         }
     }
 };
-
-
-//buggos
-//second player unable to correctly fire weapon or target enemies. generally unreliable.
-//third player to join unable to be seen by second player. fourth player joining caused third to crash.

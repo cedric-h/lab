@@ -1,0 +1,10 @@
+{
+	"angryBoi": {
+		"spawns": [
+			{"position": [10, 	0,	0]}
+		],
+		"scaleVariance": [0.75, 1.25],
+		"health": 2,
+		"weapon": "club"
+	}
+}

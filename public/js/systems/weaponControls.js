@@ -50,6 +50,12 @@ define(['../lib/three.js', '../util/closestEntity.js'], function(THREE, closestE
 					});
 				}
 			}
+
+			if(event.key.toLowerCase() === 'e')
+				server.emit('interact');
+
+			if(event.key === ";")
+				server.emit('printPosition');
 		});
 	});
 

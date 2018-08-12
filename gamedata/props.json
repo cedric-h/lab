@@ -1,0 +1,72 @@
+{
+
+
+	"lever": {
+
+		"spawns": [{
+			"position": [-17, 0, 0]
+		}],
+
+		"text": {
+			"title": "lever",
+			"body":  "Hi. I'm a lever. \n Press E to flip me. If you do that, a bunch of baddies will spawn, so be prepared. If you've never flipped me before, you might want to check out the book to your right. Best of luck!"
+		},
+
+		"interactable": {
+			"interactionDistance": 2.25
+		}
+
+	},
+
+
+	"syringe": {
+
+		"spawns": [{
+			"position": [-16, -11, 0]
+		}],
+
+		"text": {
+			"title": "syringe",
+			"body":  "Hi! I'm a syringe! \n I can heal you, but only if there aren't any baddies around. :D \n Press E to activate me! DO IT!!! \n Let's hope you aren't afraid of needles!"
+		},
+
+		"interactable": {
+			"interactionDistance": 2.25
+		}
+
+	},
+
+
+	"book": {
+
+		"spawns": [
+			{
+				"position": [-16, 17.5, 0],
+
+				"text": {
+					"title": "intro book",
+					"body":  "Thanks for checking out my broken mess of a game! It's a huge work in progress, so excuse the bugs, zany graphics, lackluster mechanics, and absence of content. Fear not, things will get better! Probably... Slowly? I'll fix the bugs, at least."
+				}
+			},
+			{
+				"position": [-16, 11, 0],
+
+				"text": {
+					"title": "controls book",
+					"body":  "Hey!"
+				}
+			},
+			{
+				"position": [-16, -17.5, 0],
+
+				"text": {
+					"title": "credits book",
+					"bdoy":  "Cedric Hutchings."
+				}
+			}
+		]
+
+	}
+
+
+}

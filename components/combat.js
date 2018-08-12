@@ -9,14 +9,20 @@ module.exports = {
 	factory: () =>
 	{
 		return {
-			target: 		 undefined,
+			//ranged
 			projectileCount: 0,
 			readied: 		 false,
 			readying: 		 false,
-			attackOn: 		 false,
+			readiedPosition: new THREE.Vector3(),
+
+			//melee
 			withinRange: 	 false,
 			lastAttackDate:  undefined,
-			readiedPosition: new THREE.Vector3(),
+			isSwinging: 	 false,
+
+			//both
+			target: 		 undefined,
+			attackOn: 		 false,
 			emitter: 		 new EventEmitter()
 		}
 	},

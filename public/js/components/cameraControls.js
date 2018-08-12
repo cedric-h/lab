@@ -7,7 +7,7 @@ define(['../lib/three.js'], (THREE) =>
 		}),
 		factory: () =>
 		{
-			return {
+			let config = {
 				//data
 				radius: 			6,
 				offset: 			new THREE.Vector3(//from the position this entity also has.
@@ -27,6 +27,13 @@ define(['../lib/three.js'], (THREE) =>
 				mouseControlled: 	false,
 				entity: 			undefined
 			}
+
+			config.default = {
+				radius: config.radius,
+				offset: config.offset.clone()
+			}
+
+			return config;
 		}
 	}
 });

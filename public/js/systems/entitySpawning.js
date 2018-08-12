@@ -19,7 +19,6 @@ define(['../lib/three.js'], function(THREE)
     {
         //create entity, add components
         let entity = entities.create();
-
         //every entity loaded this way has a serverId, just for commmunication later.
         entities.addComponent(entity, "serverId");
         //programatically add components
@@ -27,16 +26,27 @@ define(['../lib/three.js'], function(THREE)
             entities.addComponent(entity, component)
         );
 
-        //configure those new components
-        Object.keys(entityData.componentOverrides).forEach(component =>
+
+        //default unpacking for that new component data
+        Object.keys(entityData.componentOverrides).forEach(componentName =>
         {
-            let override = entityData.componentOverrides[component];
-            entities.setComponent(entity, component, override);
+            let override = entityData.componentOverrides[componentName];
+
+            if(typeof override === "object")
+            {
+                let component = entities.getComponent(entity, componentName)
+                Object.assign(component, override);
+            }
+
+            else
+                entities.setComponent(entity, componentName, override);
         });
 
-        //configuration for individual components
+
+        //more advanced unpacking for components that require such
         if(entityData.components.indexOf("modelName") !== -1)
         {
+            console.log(entities.getComponent(entity, 'modelName') + ' assigning');
             entities.addComponent(entity, "model");
 
             let model = entities.getComponent(entity, "model");
@@ -62,7 +72,7 @@ define(['../lib/three.js'], function(THREE)
         //when the server sends us players/enemiesToInstantiate, load those.
         //these are the entities that existed prior to the client logging in
         Promise.all(
-            ['players', 'enemies'].map(modelSource =>
+            ['players', 'props', 'enemies'].map(modelSource =>
             {
                 return new Promise((resolve, reject) =>
                     server.once(modelSource + "ToInstantiate", (entitiesData) =>
