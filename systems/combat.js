@@ -73,6 +73,7 @@ entities.emitter.on('combatCreate', entity =>
 					combat.readied  = true;
 					combat.readying = false;
 					combat.readiedPosition.copy(attackerModel.position);
+					combat.readiedTime = Date.now();
 				},
 				preparationTimes['shoot'] * 1000
 			)
@@ -82,10 +83,11 @@ entities.emitter.on('combatCreate', entity =>
 	combat.emitter.on('toggleAttackOn', attackData =>
 	{
 		let weapon = entities.getComponent(entity, "weapon");
+		let attack = weapon.attacks[attackData.attackIndex];
 
-		if(weapon.type === "ranged" && !combat.attackOn)
+		if(weapon.type === "ranged" && !attack.active)
 		{
-			combat.attackOn = true;
+			attack.active = true;
 			combat.readying = true;
 			combat.emitter.emit('newTarget', attackData.target);
 			
@@ -93,13 +95,13 @@ entities.emitter.on('combatCreate', entity =>
 			{
 				if(
 					entities.find('combat').indexOf(entity) === -1 ||
-					!shouldFire(entity) ||
-					(
-						!combat.readying &&
-						!combat.readied
-					)
+					!shouldFire(entity) 						   ||
+					(!combat.readying && !combat.readied)
 				)
-					combat.attackOn = false;
+				{
+					if(attack.type === "toggle")
+						attack.active = false;
+				}
 
 				else
 				{
@@ -114,14 +116,34 @@ entities.emitter.on('combatCreate', entity =>
 					);
 					let attackerDirection = attackerModel.rotation.z;
 
-					if(
-						attackerDirection < direction + 0.09 &&
-						attackerDirection > direction - 0.09
-					)
-						combat.emitter.emit('launchRangedAttack');
+					if(attackerDirection < direction + 0.09 && attackerDirection > direction - 0.09)
+					{
+						combat.emitter.emit('launchRangedAttack', attackData);
 						//see attackRanged.js
 
-					setTimeout(fireArrowIfShould, 500 + (Math.random()*32)*(Math.random()*32));
+						if(attack.type === "single")
+							setTimeout(
+								() => attack.active = false,
+								attack.cooldown
+							);
+
+						if(client)
+							client.send('attackBarUpdate', {
+								slotIndex: attackData.attackIndex,
+								ready: false,
+								readyAgainAfter: attack.type === "single" ? attack.cooldown : 500
+							});
+					}
+
+					//if the attack couldn't go through but the attack type was single,
+					//try again in 100ms.
+					else if(attack.type === "single")
+						setTimeout(fireArrowIfShould, 100);
+
+					//if the attack type is toggle, plot another attack soon regardless of
+					//whether or not it hit.
+					if(attack.type === "toggle")
+						setTimeout(fireArrowIfShould, 500 + (Math.random()*32)*(Math.random()*32));
 				}
 			})();
 		}
@@ -129,7 +151,7 @@ entities.emitter.on('combatCreate', entity =>
 		else if(weapon.type === "melee")
 		{
 			combat.emitter.emit('newTarget', attackData.target);
-			combat.attackOn = true;
+			attack.active = true;
 		}
 	});
 });
@@ -186,12 +208,12 @@ entities.emitter.on('clientCreate', entity =>
 			let lastPos = combat.readiedPosition;
 
 			if(
-				model &&
+				model 										&&
 				(
-					model.position.x > lastPos.x + 0.4 ||
-					model.position.x < lastPos.x - 0.4 ||
-					model.position.y > lastPos.y + 0.4 ||
-					model.position.y < lastPos.y - 0.4
+					model.position.x > lastPos.x + 4.2 ||
+					model.position.x < lastPos.x - 4.2 ||
+					model.position.y > lastPos.y + 4.2 ||
+					model.position.y < lastPos.y - 4.2
 				)
 			)
 				combat.readied = false;

@@ -64,37 +64,43 @@ define(['../lib/three.js'], function(THREE)
 		if(targetEntity !== undefined && attackerEntity !== undefined)
 		{
 			let weapon = entities.getComponent(attackerEntity, "weapon");
+			weapon.shouldShoot = true;
 
-			if(!weapon.isUp && !weapon.isMoving)
+			if(attackerEntity === entities.find('movementControls')[0])
 			{
-				weapon.shouldShoot = true;
+				let movement 		   = entities.getComponent(attackerEntity, "movement");
+				let movementControls   = entities.getComponent(attackerEntity, "movementControls");
+				let velocityParameters = entities.getComponent(attackerEntity, "velocityParameters");
 
-				if(attackerEntity === entities.find('movementControls')[0])
+				movementControls.blocked = true;
+				velocityParameters.frictionOn = true;
+				movement.active = false;
+				movement.currentSpeed = 0;
+
+				entities.emitter.on('movementControlsBlocked', function unblockControls()
 				{
-					let movement 		 = entities.getComponent(attackerEntity, "movement");
-					let velocity 		 = entities.getComponent(attackerEntity, "velocity");
-					let movementControls = entities.getComponent(attackerEntity, "movementControls");
+					let weapon = entities.getComponent(attackerEntity, 'weapon');
 
-					movementControls.blocked = true;
-					movement.active = false;
-					movement.currentSpeed = 0;
-					velocity.set(0, 0, 0);
-
-					entities.emitter.on('movementControlsBlocked', function unblockControls()
+					if(!weapon.isMoving)
 					{
-						let weapon = entities.getComponent(attackerEntity, 'weapon');
+						//this will make them put down their arms.
+						//at the end of that animation, movementControls.blocked is set to false.
+						//so this code says, the first time their weapon is blocked, if
+						//they're not already moving to put down their weapon, put it down
+						//which automatically unblocks movement when the animation is near finished.
+						weapon.shouldStop = true;
 
-						if(!weapon.isMoving)
-						{
-							weapon.shouldStop = true;
+						//make sure there's not a key that's flipped on residually
+						Object.values(movementControls.keyMap).forEach(key =>
+							key.isPressed = false
+						);
 
-							entities.emitter.removeListener(
-								'movementControlsBlocked',
-								unblockControls
-							);
-						}
-					});
-				}
+						entities.emitter.removeListener(
+							'movementControlsBlocked',
+							unblockControls
+						);
+					}
+				});
 			}
 		}
 	});
@@ -218,7 +224,7 @@ define(['../lib/three.js'], function(THREE)
 			let weapon 			 = entities.getComponent(entity, "weapon");
 			let movementControls = entities.getComponent(entity, "movementControls");
 
-			if(weapon.type === "ranged" && !weapon.isMoving)
+			if(weapon.type === "ranged" && !weapon.isMoving && weapon.animation !== undefined)
 			{
 				let animation = entities.getComponent(entity, "animation");
 
@@ -278,6 +284,7 @@ define(['../lib/three.js'], function(THREE)
 
 							weapon.isMoving = false;
 							weapon.isUp = false;
+							weapon.shouldShoot = false;
 
 							server.emit('readiedNoLonger');
 

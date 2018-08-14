@@ -15,9 +15,9 @@
 				directionOverride:  false,
 				//speed stuff
 				maxSpeed:			15,		//in three.js units a second
-				secondsToMax:		0.75,	//how many seconds it takes to reach max speed from full stop
+				secondsToMax:		0.75,	//how many seconds it takes to max speed from full stop
 				currentSpeed: 		0,
-				rotationSpeed:		0.125,	//%, multiplied into the time it takes to do a turn
+				rotationSpeed:		0.115,	//%, multiplied into the time it takes to do a turn
 				//rotation variables
 				direction: 			new THREE.Quaternion(),
 				euler: 				new THREE.Euler(),

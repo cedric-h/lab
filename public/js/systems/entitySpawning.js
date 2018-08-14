@@ -46,7 +46,6 @@ define(['../lib/three.js'], function(THREE)
         //more advanced unpacking for components that require such
         if(entityData.components.indexOf("modelName") !== -1)
         {
-            console.log(entities.getComponent(entity, 'modelName') + ' assigning');
             entities.addComponent(entity, "model");
 
             let model = entities.getComponent(entity, "model");

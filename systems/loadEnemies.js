@@ -54,6 +54,9 @@ const getEnemyData = (entity) =>
 
 const getRandom = bounds =>
 {
+    if(!Array.isArray(bounds))
+        return bounds;
+
 	let big   = bounds[0];
 	let small = bounds[1];
 
@@ -72,39 +75,57 @@ const spawnThisFormation = formation =>
 
         enemyType.spawns.forEach(enemy =>
         {
+            //spawn it.
             let enemyEntity = entities.create();
             entities.addComponent(enemyEntity, "ai");
             entities.addComponent(enemyEntity, "combat");
             entities.addComponent(enemyEntity, "health");
             entities.addComponent(enemyEntity, "weapon");
             entities.addComponent(enemyEntity, "attackable");
+
+
             //model
             entities.addComponent(enemyEntity, "modelName");
-            entities.setComponent(enemyEntity, "modelName", enemyName);
+            entities.setComponent(enemyEntity, "modelName", enemyName || "angryBoi");
             entities.addComponent(enemyEntity, "model");
 
+
+            //orientation
             let model = entities.getComponent(enemyEntity, "model");
-            //after model loads
             model.position.fromArray(enemy.position);
             model.scale.multiplyScalar(
-                getRandom(enemy.scaleVariance || enemyType.scaleVariance)
+                getRandom(enemy.scaleVariance || enemyType.scaleVariance || 1)
             );
+
+
+            //speed/ai tweaks
+            let ai = entities.getComponent(enemyEntity, "ai");
+            ai.speed = getRandom(enemy.speed || enemyType.speed || 4);
+
 
             //weapon
             let weapon  = entities.getComponent(enemyEntity, "weapon");
-            weapon.name = enemy.weapon || enemyType.weapon;
+            weapon.name = enemy.weapon || enemyType.weapon || 'club';
             entities.emitter.emit('weaponEquip', enemyEntity);
             setImmediate(() =>
             {
                 if(weapon.type === 'melee')
                     entities.addComponent(enemyEntity, 'collider');
+
+                let weaponConfig = enemy.weaponConfig || enemyType.weaponConfig;
+
+                if(weaponConfig)
+                    Object.assign(weapon, weaponConfig);
             });
+
 
             //health
             let health = entities.getComponent(enemyEntity, 'health');
-            health.val = enemy.health || enemyType.health;
+            health.val = getRandom(enemy.health || enemyType.health || 1);
             health.max = health.val;
 
+
+            //let everyone know of the new arrival.
             broadcast('entitySpawn', getEnemyData(enemyEntity));
 
             isSpawningEnemies = false;

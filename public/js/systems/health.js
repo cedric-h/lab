@@ -166,10 +166,17 @@ define(['../lib/three.js'], function(THREE)
 					if(healthPercentage < animationProgress && (duration - deplete.time) > 0.14)
 						health.mixer.update(delta);
 
-					//if health percentage 10% or more behind animationProgress,
+					//if the two are  10% or more apart animationProgress,
 					//restart the animation.
 					if(animationProgress - healthPercentage < -0.1)
 						deplete.reset().play();
+
+					if(healthPercentage === 1 && animationProgress !== 1)
+					{
+						ring.rotation.z = 0;
+						deplete.reset().play()
+						health.mixer.update(0);
+					}
 				}
 			}
 		}

@@ -32,6 +32,8 @@ define(['../lib/three.js'], function(THREE)
 					);
 			}
 		});
+
+		entities.emitter.emit('weaponStatsAssigned', wielderEntity);
 	}
 
 

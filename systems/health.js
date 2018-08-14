@@ -22,8 +22,7 @@ entities.emitter.on("clientCreate", entity =>
     //give them health
     entities.addComponent(entity, "health");
     let health = entities.getComponent(entity, "health");
-    health.val = 20;
-    health.max = 20;
+    health.val = health.max = 20;
 
 	client.once('localIdReceived', () =>
     {

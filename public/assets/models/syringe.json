@@ -2712,7 +2712,7 @@
             }],
             "parent":0
         }],
-        "name":"ArmatureAction",
+        "name":"interact",
         "length":4.46667
     }],
     "uvs":[],

@@ -1,15 +1,50 @@
 {
 	"club": {
+
 		"type":  		"melee",
 
-		"reach": 		1.75,
-		"damage": 		3,
-		"knockback":	1,
+		"attacks": [
+			{
+				"reach": 		1.75,
+				"damage": 		3,
+				"knockback":	1,
 
-		"cooldown":		2000,
-		"hitTime":		365
+				"cooldown":		2000,
+				"hitTime":		365
+			}
+		]
+
 	},
+
+
 	"bow": {
-		"type": 		"ranged"
+
+		"type": 		"ranged",
+
+		"attacks": [
+			{
+				"image":  "aim.png",
+				"type":   "toggle",
+
+				"damage": 1
+			},
+			{
+				"image": 		"volley.png",
+				"type":			"single",
+
+				"damage":		1,
+				"shotsFired": 	7,
+				"cooldown":		5000
+			},
+			{
+				"image": 		"stun.png",
+				"type":			"single",
+
+				"damage":		1,
+				"slowSpeedBy":	0.2,
+				"cooldown":		15000
+			}
+		]
+
 	}
 }

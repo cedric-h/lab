@@ -21,10 +21,14 @@ entities.emitter.on('modelCreate', entity =>
 
     if(modelName)
     {
+        //overwrite with model
         entities.entities[entity].model = baseModels[modelName].clone();
 
-        //add model to scene
+        //tag model
         let model = entities.getComponent(entity, "model");
+        model.name = entity;
+
+        //add to scene
         scene.add(model);
     }
 });

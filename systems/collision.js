@@ -49,7 +49,7 @@ module.exports = {
         if(collision.lastPos === undefined)
             collision.lastPos = model.position.clone();
 
-        else if(entities.find('model').indexOf(collision.target) !== -1 || collision.target === "map")
+        else
         {
             raycaster.set(
                 model.position,
@@ -59,18 +59,28 @@ module.exports = {
 
             if(collision.target !== "map")
             {
-                let targetModel = entities.getComponent(collision.target, "model");
-                targetModel.updateMatrixWorld();
+                let targetModels = entities.find(collision.targetType).map(entity =>
+                {
+                    let model = entities.getComponent(entity, 'model');
 
-                raycaster.intersectObject(
-                    targetModel,
+                    if(model)
+                    {
+                        model.updateMatrixWorld();
+                        return model;
+                    }
+                }).filter(element =>
+                    element !== undefined
+                );
+
+                raycaster.intersectObjects(
+                    targetModels,
                     false,
                     results
                 );
             }
 
             if(results.length > 0)
-                collision.emitter.emit('hit', 'target');
+                collision.emitter.emit('hit', 'target', results[0].object.name);
 
             else
             {

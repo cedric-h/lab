@@ -1,0 +1,16 @@
+{
+	"enabled": true,
+	"angryBoi": {
+		"spawns": [
+			{"position": [-16, 16, 0]},  {"position": [-16, 16, 0]},
+			{"position": [-16, -16, 0]}, {"position": [16, -16, 0]},
+
+			{"position": [16,  0, 0]}, {"position": [0,   16,	0]},
+			{"position": [-16, 0, 0]}, {"position": [0,   -16,  0]}
+		],
+		"scaleVariance": [0.75, 1.25],
+		"health": 2,
+		"speed":  10,
+		"weapon": "club"
+	}
+}

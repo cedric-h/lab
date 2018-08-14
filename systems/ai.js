@@ -53,11 +53,13 @@ module.exports = {
             if(closestPlayerEntity !== undefined)
             {
                 combat.emitter.emit('toggleAttackOn', {
-                    target: closestPlayerEntity
+                    target:      closestPlayerEntity,
+                    attackIndex: 0
                 });
             }
 	    }
 
+        //if we have a target
         if(combat.target !== undefined)
         {
             let targetModel = entities.getComponent(combat.target, "model");
@@ -74,18 +76,13 @@ module.exports = {
 
                 delta.normalize();
                 delta.multiplyScalar(ai.speed * timeDelta);
+
+                //raycast
                 raycastOrigin.addVectors(delta, model.position);
                 raycastOrigin.z += 5;
 
-                raycaster.set(
-                    raycastOrigin,
-                    down
-                );
-                raycaster.intersectObject(
-                    map,
-                    true,
-                    results
-                );
+                raycaster.set(raycastOrigin, down);
+                raycaster.intersectObject(map, true, results);
 
                 if(results.length > 0)
                 {

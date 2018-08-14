@@ -2,6 +2,7 @@ define(['../lib/three.js'], function(THREE)
 {
 	var serverUpdateCounter = 0;
 	var gravityOnTimeout;
+	var lastPosition = new THREE.Vector3();
 
 	//function that manipulates keyMap
 	const updateKeyMap = event =>
@@ -67,6 +68,9 @@ define(['../lib/three.js'], function(THREE)
 		let model 	 	 	   = entities.getComponent(entity, "model");
 		let hitbox 		 	   = entities.getComponent(entity, "hitbox");
 
+		if(model.position.equals(lastPosition))
+			return;
+
 		let thingsToTeleportOutOfWall = velocityParameters.dependents.slice();
 		thingsToTeleportOutOfWall.push(entity);
 
@@ -108,12 +112,16 @@ define(['../lib/three.js'], function(THREE)
 			});
 		}
 
+		velocity.z = 0;
+
+		lastPosition.copy(model.position);
+
 		//we hit something! turn off gravity!
 		velocityParameters.gravityOn = false;
 		clearTimeout(gravityOnTimeout);
 		gravityOnTimeout = setTimeout(
 			() => velocityParameters.gravityOn = true,
-			1000
+			300
 		);
 
 

@@ -1,0 +1,25 @@
+{
+	"enabled": true,
+	"angryBoi": {
+		"spawns": [
+			{
+				"position": [10,	0, 		0]
+			}
+		],
+		"scaleVariance": [7, 8],
+		"health": 30,
+		"weapon": "club",
+		"weaponConfig": {
+			"attacks": [
+				{
+					"reach": 		1.25,
+					"damage": 		12,
+					"knockback":	1,
+
+					"cooldown":		4000,
+					"hitTime":		365
+				}
+			]
+		}
+	}
+}

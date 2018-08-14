@@ -14,6 +14,7 @@ module.exports = {
 			readied: 		 false,
 			readying: 		 false,
 			readiedPosition: new THREE.Vector3(),
+			readiedTime: 	 undefined,
 
 			//melee
 			withinRange: 	 false,

@@ -15,7 +15,7 @@ module.exports = {
 	{
 		return {
 			lastPos: 	undefined,
-			target:  	undefined,
+			targetType: 'ai', //what the models of can be collided with.
 			emitter: 	new EventEmitter(),
 			offset: 	new THREE.Vector3(0, 0, 0)
 		};

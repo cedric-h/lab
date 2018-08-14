@@ -24,6 +24,9 @@
 			let velocityParameters	= entities.getComponent(entity, 'velocityParameters');
 			let movement			= entities.getComponent(entity, 'movement');
 
+			if(delta > 0.2)
+				return;
+
 			if(typeof model !== 'string')
 			{
 				let thingsToMove = (velocityParameters !== undefined) ? velocityParameters.dependents.slice() : [];
@@ -55,14 +58,17 @@
 								movement.currentSpeed = 0;
 						}
 					}
+
+					if(velocityParameters.gravityOn)
+					{
+						velocity.z += -0.1;
+						velocity.z *= 1.1;
+					}
 				}
 
 
 				//get how much it's moving this frame
 				let deltaVelocity = velocity.clone();
-
-				if(velocityParameters && velocityParameters.gravityOn)
-					deltaVelocity.z += -1;
 
 				deltaVelocity.multiplyScalar(delta);
 

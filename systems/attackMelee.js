@@ -26,7 +26,7 @@ function updateWithinRange(attackerEntity)
         //target components
         let targetModel = entities.getComponent(combat.target, "model");
 
-        let reach = weapon.reach * ((attackerModel.scale.x + attackerModel.scale.y)/2);
+        let reach = weapon.attacks[0].reach * ((attackerModel.scale.x + attackerModel.scale.y)/2);
         combat.withinRange = attackerModel.position.distanceTo(targetModel.position) < reach;
     }
 }
@@ -63,11 +63,13 @@ function shouldAttack(attackerEntity)
     }
 }
 
-function meleeAttack(attackerEntity)
+function meleeAttack(attackerEntity, attackData)
 {
     //attacker components
     let combat = entities.getComponent(attackerEntity, "combat");
     let weapon = entities.getComponent(attackerEntity, "weapon");
+
+    let attack = weapon.attacks[0];
 
     if(shouldAttack(attackerEntity))
     {
@@ -82,9 +84,9 @@ function meleeAttack(attackerEntity)
                 combat.isSwinging = false;
 
                 if(shouldAttack(attackerEntity))
-                    entities.getComponent(combat.target, "health").val -= weapon.damage;
+                    entities.getComponent(combat.target, "health").val -= attack.damage;
             },
-            weapon.hitTime
+            attack.hitTime
         );
     }
 }
@@ -96,8 +98,8 @@ entities.emitter.on('combatCreate', entity =>
     let combat = entities.getComponent(entity, "combat");
 
 
-    const launchMeleeAttack = targetPos =>
-        meleeAttack(entity, targetPos);
+    const launchMeleeAttack = attackData =>
+        meleeAttack(entity, attackData);
 
     combat.emitter.on('launchMeleeAttack', launchMeleeAttack);
 
@@ -112,6 +114,8 @@ entities.emitter.on('combatCreate', entity =>
     });
 });
 
+
+//should probably do this in ai.js, but updateWithinRange...
 setInterval(
     () =>
     {
@@ -120,15 +124,17 @@ setInterval(
             let weapon = entities.getComponent(entity, "weapon");
             let combat = entities.getComponent(entity, "combat");
 
+            let attack = weapon.attacks[0];
+
             if(entities.find('model').indexOf(combat.target) === -1)
-                combat.attackOn = false;
+                attack.active = false;
 
             else if(weapon && weapon.type === "melee")
             {
                 if(combat.lastAttackDate === undefined)
                     combat.lastAttackDate = Date.now();
 
-                if(combat.lastAttackDate + weapon.cooldown < Date.now())
+                if(combat.lastAttackDate + weapon.attacks[0].cooldown < Date.now())
                     meleeAttack(entity);
 
                 else

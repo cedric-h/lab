@@ -12,140 +12,29 @@
 	"buffers":
 	[
 		{
-			"file": "systems/loadEnemies.js",
+			"file": "public/gamedata/weapons.json",
 			"settings":
 			{
-				"buffer_size": 4954,
+				"buffer_size": 382,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "systems/movePlayer.js",
+			"file": "public/js/systems/weaponControls.js",
 			"settings":
 			{
-				"buffer_size": 1761,
+				"buffer_size": 2120,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/js/systems/entitySpawning.js",
+			"file": "public/js/systems/weaponUI.js",
 			"settings":
 			{
-				"buffer_size": 3706,
+				"buffer_size": 848,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "systems/loadProps.js",
-			"settings":
-			{
-				"buffer_size": 2839,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "components/prop.js",
-			"settings":
-			{
-				"buffer_size": 172,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "gamedata/props.json",
-			"settings":
-			{
-				"buffer_size": 190,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/gamedata/propText.json",
-			"settings":
-			{
-				"buffer_size": 249,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/systems/textbox.js",
-			"settings":
-			{
-				"buffer_size": 4241,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/components/textbox.js",
-			"settings":
-			{
-				"buffer_size": 329,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "systems/interactable.js",
-			"settings":
-			{
-				"buffer_size": 1352,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "components/interactable.js",
-			"settings":
-			{
-				"buffer_size": 243,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/systems/interactionAnimation.js",
-			"settings":
-			{
-				"buffer_size": 1284,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/systems/weaponStats.js",
-			"settings":
-			{
-				"buffer_size": 1877,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/components/cameraControls.js",
-			"settings":
-			{
-				"buffer_size": 778,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/systems/animation.js",
-			"settings":
-			{
-				"buffer_size": 1254,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/components/animation.js",
-			"settings":
-			{
-				"buffer_size": 324,
 				"line_ending": "Windows"
 			}
 		}
@@ -162,11 +51,15 @@
 		"selected_items":
 		[
 			[
+				"discord",
+				"Discord Rich Presence: Connect to Discord"
+			],
+			[
 				"rename",
 				"Rename File"
 			],
 			[
-				"discord",
+				"d",
 				"Discord Rich Presence: Connect to Discord"
 			],
 			[
@@ -254,51 +147,72 @@
 	],
 	"file_history":
 	[
-		"/C/projects/lab/systems/weaponStats.js",
-		"/C/projects/lab/systems/loadPlayer.js",
-		"/C/projects/lab/public/js/systems/weaponControls.js",
+		"/C/projects/lab/systems/loadEnemies.js",
+		"/C/projects/lab/gamedata/props.json",
+		"/C/projects/lab/gamedata/enemyFormations/meleeBoss.json",
+		"/C/projects/lab/gamedata/enemyFormations/meleeHorde.json",
+		"/C/projects/lab/gamedata/enemyFormations/rangedHorde.json",
+		"/C/projects/lab/gamedata/enemyFormations/fishInABarrelMelee.json",
+		"/C/projects/lab/gamedata/enemyFormations/fishInABarrelRanged.json",
+		"/C/projects/lab/gamedata/enemyFormations/hexFormation.json",
+		"/C/projects/lab/systems/health.js",
+		"/C/projects/lab/components/collision.js",
+		"/C/projects/lab/systems/loadModels.js",
+		"/C/projects/lab/systems/collision.js",
 		"/C/projects/lab/components/combat.js",
 		"/C/projects/lab/systems/combat.js",
-		"/C/projects/lab/components/weapon.js",
-		"/C/projects/lab/public/js/components/animation.js",
-		"/C/projects/lab/public/js/systems/animation.js",
-		"/C/projects/lab/public/js/systems/weaponAnimation.js",
-		"/C/projects/lab/systems/loadEnemies.js",
-		"/C/projects/lab/gamedata/enemyFormations/rangedHorde.json",
-		"/C/projects/lab/gamedata/enemyFormations/meleeHorde.json",
-		"/C/projects/lab/gamedata/enemyFormations/hexFormation.json",
 		"/C/projects/lab/systems/attackMelee.js",
+		"/C/projects/lab/systems/attackRanged.js",
+		"/C/projects/lab/public/gamedata/weapons.json",
+		"/C/projects/lab/public/js/systems/weaponStats.js",
+		"/C/projects/lab/public/js/systems/weaponControls.js",
+		"/C/projects/lab/systems/ai.js",
+		"/C/projects/lab/systems/weaponStats.js",
+		"/C/projects/lab/systems/syringe.js",
+		"/C/projects/lab/public/js/systems/health.js",
+		"/C/projects/lab/public/js/systems/movementControls.js",
+		"/C/projects/lab/public/js/components/movementControls.js",
+		"/C/projects/lab/public/js/systems/weaponAnimation.js",
+		"/C/projects/lab/public/js/systems/interactionAnimation.js",
+		"/C/projects/lab/systems/interactable.js",
+		"/C/projects/lab/components/ai.js",
+		"/C/projects/lab/components/weapon.js",
+		"/C/projects/lab/public/js/systems/textbox.js",
+		"/C/projects/lab/public/assets/models/syringe.json",
+		"/C/projects/lab/public/assets/models/lever.json",
+		"/C/projects/lab/public/js/systems/velocity.js",
+		"/C/projects/lab/public/js/components/movement.js",
+		"/C/projects/lab/public/js/systems/movementUpdate.js",
+		"/C/projects/lab/public/js/systems/entitySpawning.js",
+		"/C/projects/lab/public/js/systems/hitbox.js",
+		"/C/projects/lab/public/js/systems/animation.js",
+		"/C/projects/lab/public/js/components/textbox.js",
+		"/C/projects/lab/systems/loadProps.js",
+		"/C/projects/lab/components/prop.js",
+		"/C/projects/lab/package.json",
+		"/C/projects/lab/public/gamedata/propText.json",
+		"/C/projects/lab/public/js/components/hitbox.js",
+		"/C/Users/cedhu/Desktop/client.js",
+		"/C/Users/cedhu/Desktop/game.js",
+		"/C/projects/lab/public/js/components/animation.js",
+		"/C/projects/lab/public/js/components/cameraControls.js",
+		"/C/projects/lab/components/interactable.js",
+		"/C/projects/lab/systems/movePlayer.js",
+		"/C/projects/lab/systems/loadPlayer.js",
 		"/C/projects/lab/gamedata/enemyFormations/enemy.json",
 		"/C/projects/lab/gamedata/bad/meleeHorde.json",
 		"/C/projects/lab/gamedata/enemyFormations/enemy.js",
-		"/C/projects/lab/gamedata/props.json",
-		"/C/projects/lab/public/js/systems/health.js",
-		"/C/projects/lab/public/js/systems/entitySpawning.js",
-		"/C/projects/lab/systems/interactable.js",
-		"/C/projects/lab/components/interactable.js",
-		"/C/projects/lab/public/js/systems/interactionAnimation.js",
 		"/C/projects/lab/gamedata/enemiesHexFormation.json",
-		"/C/projects/lab/public/assets/models/lever.json",
 		"/C/projects/lab/gamedata/enemies.json",
 		"/C/projects/lab/public/js/components/health.js",
 		"/C/projects/lab/public/js/loadECS.js",
-		"/C/projects/lab/systems/ai.js",
-		"/C/projects/lab/components/ai.js",
 		"/C/projects/lab/server.js",
 		"/C/projects/lab/public/js/login.js",
 		"/C/projects/lab/systems/loginPlayer.js",
 		"/C/projects/lab/components/client.js",
-		"/C/projects/lab/public/js/systems/movementControls.js",
-		"/C/projects/lab/public/js/components/movementControls.js",
-		"/C/projects/lab/public/gamedata/weapons.json",
 		"/C/projects/lab/components/collider.js",
 		"/C/projects/lab/systems/collider.js",
-		"/C/projects/lab/components/collision.js",
-		"/C/projects/lab/systems/collision.js",
 		"/C/projects/lab/components/environment.js",
-		"/C/projects/lab/systems/loadProps.js",
-		"/C/projects/lab/systems/attackRanged.js",
-		"/C/projects/lab/public/js/systems/movementUpdate.js",
 		"/C/projects/lab/components/environment.json",
 		"/C/projects/lab/node_modules/entity-component-system/lib/object-pool.js",
 		"/C/projects/lab/public/js/systems/weaponModels.js",
@@ -307,26 +221,18 @@
 		"/C/projects/lab/public/assets/models/player.json",
 		"/C/projects/lab/systems/broadcastMovement.js",
 		"/C/projects/lab/public/gamedata/weaponPositionAdjustments.json",
-		"/C/projects/lab/public/js/systems/weaponStats.js",
 		"/C/projects/lab/public/js/components/weapon.js",
-		"/C/projects/lab/systems/health.js",
 		"/C/projects/lab/systems/rangedAttack.js",
-		"/C/projects/lab/public/js/components/movement.js",
 		"/C/projects/lab/public/js/systems/movementAnimation.js",
-		"/C/projects/lab/systems/movePlayer.js",
 		"/C/projects/lab/public/js/systems/interpolateMovement.js",
-		"/C/projects/lab/public/js/components/cameraControls.js",
 		"/C/projects/lab/public/js/systems/cameraControls.js",
 		"/C/projects/lab/node_modules/three/examples/js/loaders/NodeMaterialLoader.js",
 		"/C/projects/lab/public/js/components/velocityParameters.js",
 		"/C/projects/lab/public/js/components/velocity.js",
-		"/C/projects/lab/public/js/systems/velocity.js",
 		"/C/projects/lab/gamedata/arrowOrigins.json",
 		"/C/projects/lab/public/js/systems/collidable.js",
 		"/C/projects/lab/public/assets/scenes/testRoom.json",
 		"/C/projects/lab/public/assets/collisionMaps/testRoom.json",
-		"/C/projects/lab/systems/loadModels.js",
-		"/C/projects/lab/public/js/systems/hitbox.js",
 		"/C/projects/lab/public/js/components/modelName.js",
 		"/C/projects/lab/public/assets/ui/healthRing.json",
 		"/C/projects/lab/public/js/websocketsWrapperClient.js",
@@ -365,23 +271,10 @@
 		"/C/projects/lab/systems/enemies.js",
 		"/C/projects/lab/systems/enemies.jss",
 		"/C/projects/lab/public/js/components/collidable.js",
-		"/C/projects/lab/public/js/components/hitbox.js",
 		"/C/Users/cedhu/Downloads/scene.json",
 		"/C/projects/lab/public/assets/scenes/testRoomNoCollision.json",
 		"/C/projects/lab/public/js/systems/collideable.js",
-		"/C/projects/lab/public/scenes/testRoom.json",
-		"/C/projects/lab/public/js/components/collision.js",
-		"/C/projects/lab/public/js/components/clientCollisionPrediction.js",
-		"/C/projects/lab/public/js/components/projectile.js",
-		"/C/projects/lab/public/js/systems/shootingControls.js",
-		"/C/projects/lab/public/models/player.json",
-		"/C/projects/lab/components/model.js",
-		"/C/projects/lab/broadcast.js",
-		"/C/projects/bromine/TPS/TPSgame.js",
-		"/C/projects/lab/public/js/systems/manageOtherPlayers.js",
-		"/C/projects/lab/public/js/components/serverId.js",
-		"/C/Users/cedhu/Downloads/Robot_run.blend",
-		"/C/projects/lab/public/models/bow.json"
+		"/C/projects/lab/public/scenes/testRoom.json"
 	],
 	"find":
 	{
@@ -396,9 +289,66 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"weapon",
+			"addKeyPressListener",
+			"17.5",
+			"targetAtTimeOfFiring",
+			"targetType",
+			"collision.target",
+			"collision",
+			"combat",
+			"'",
+			"combat.attackOn",
+			"combat.active",
+			"combat.attackOn",
+			"weapon.attacks[0]",
+			"weapon.",
+			"updateWithinRange",
+			"targetPos",
+			"console.log(",
+			"console",
+			"');",
+			"console",
+			"{\n\t\t\t\t\"type\":   \"single\",\n\t\t\t\t\"damage\": 1\n\t\t\t}",
+			"targetables",
+			"targets",
+			";\n",
+			"entity",
+			"Entity",
+			"entity",
+			"handleKeyPress",
+			"addAttacksListener",
+			"targetPos",
+			"blocked",
+			"Blocked",
+			"blocked",
+			"interactee",
+			"interacteeEntity",
+			"entity",
+			"interact",
+			"health",
+			"velocity.z",
+			"deltaVelocity",
+			"console.l",
+			"0.",
+			"0.6",
+			"console",
+			"console.l",
+			"movementControls",
+			"readiedPosition",
+			"lastTime",
+			"delta",
+			"lastTime",
+			"console.log",
+			"console.log(",
+			"console.",
+			"model",
+			"chance",
+			"length",
+			"name",
 			"entities.getComponent(entity, 'modelName')",
 			"model",
 			"nearTextbox",
@@ -469,64 +419,7 @@
 			"MeleeAttack",
 			"rangedAttack",
 			"weapon.animation",
-			"\\",
-			"weapon.animation",
-			"attack",
-			"shoot",
-			"targetModel",
-			"shouldRingRotate",
-			"off",
-			"if(",
-			"if",
-			"co",
-			"ProjectileCount",
-			"projectileCount",
-			"count",
-			"projectileCount",
-			"closestPlayer",
-			"combat",
-			"data.targetPos",
-			"off",
-			"targetPosition",
-			"launchAttack",
-			"attack(",
-			"attack",
-			"targetPosition",
-			"movementControls",
-			"movementSpeeds",
-			"movementSpeed",
-			"model",
-			"id",
-			"addHealthRing",
-			"addHealthRing\\",
-			"addHealthRing",
-			"weapons",
-			"healthRing",
-			"6F76ACAD-5A71-4655-8D1F-DE71338721EF",
-			"arrowModel",
-			"projectileCount",
-			"arrows[arrowData.serverId]",
-			"model",
-			"velocityParameters",
-			"lastPos",
-			"collision",
-			"X",
-			"velocity",
-			"entityDes",
-			"animationProgress",
-			"entities",
-			"destroy",
-			"model",
-			"duration",
-			"animationDuration",
-			"healthAnimationTime",
-			"shouldFire",
-			"combat",
-			"('clientRemove', playerRemovalHandler)",
-			"entities.emitter.",
-			"'clientRemove",
-			"'clientCreate",
-			"'clientRemove"
+			"\\"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -544,143 +437,53 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "systems/loadEnemies.js",
+					"file": "public/gamedata/weapons.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4954,
+						"buffer_size": 382,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								891,
-								891
+								96,
+								96
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1010.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "systems/movePlayer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1761,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								438,
-								438
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 30.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/js/systems/entitySpawning.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3706,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1566,
-								1566
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 506.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "systems/loadProps.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2839,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1281,
-								1281
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1100.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "components/prop.js",
+					"buffer": 1,
+					"file": "public/js/systems/weaponControls.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 172,
+						"buffer_size": 2120,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								162,
-								162
+								573,
+								573
 							]
 						],
 						"settings":
@@ -689,327 +492,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 80.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "gamedata/props.json",
+					"buffer": 2,
+					"file": "public/js/systems/weaponUI.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 190,
+						"buffer_size": 848,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								131,
+								131
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "public/gamedata/propText.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 249,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								249,
-								249
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "public/js/systems/textbox.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4241,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1965,
-								1965
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 956.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "public/js/components/textbox.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 329,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								221,
-								221
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "systems/interactable.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1352,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "components/interactable.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 243,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								243
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "public/js/systems/interactionAnimation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1284,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "public/js/systems/weaponStats.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1877,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1593,
-								1593
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 940.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "public/js/components/cameraControls.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 778,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								767,
-								767
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "public/js/systems/animation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1254,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								1254
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "public/js/components/animation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								324
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
 					"type": "text"
 				}
 			]
@@ -1058,7 +574,7 @@
 	"project": "lab_sublime.sublime-project",
 	"replace":
 	{
-		"height": 68.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1068,28 +584,228 @@
 		"selected_items":
 		[
 			[
-				"interactable",
-				"components\\interactable.js"
+				"weaponC",
+				"public\\js\\systems\\weaponControls.js"
 			],
 			[
-				"interac",
-				"systems\\interactable.js"
+				"weapons",
+				"public\\gamedata\\weapons.json"
 			],
 			[
-				"interactionA",
-				"public\\js\\systems\\interactionAnimation.js"
+				"loadEnemies",
+				"systems\\loadEnemies.js"
 			],
 			[
-				"interacta",
-				"systems\\interactable.js"
+				"props",
+				"gamedata\\props.json"
+			],
+			[
+				"loadModel",
+				"systems\\loadModels.js"
+			],
+			[
+				"collision",
+				"components\\collision.js"
+			],
+			[
+				"loadEe",
+				"systems\\loadEnemies.js"
+			],
+			[
+				"ai",
+				"systems\\ai.js"
+			],
+			[
+				"attackMele",
+				"systems\\attackMelee.js"
+			],
+			[
+				"weaponStats",
+				"public\\js\\systems\\weaponStats.js"
 			],
 			[
 				"prop",
 				"gamedata\\props.json"
 			],
 			[
-				"weaponStats",
+				"ai.js",
+				"systems\\ai.js"
+			],
+			[
+				"health.js",
+				"systems\\health.js"
+			],
+			[
+				"weaponCon",
+				"public\\js\\systems\\weaponControls.js"
+			],
+			[
+				"attackRanged",
+				"systems\\attackRanged.js"
+			],
+			[
+				"weaponSta",
 				"public\\js\\systems\\weaponStats.js"
+			],
+			[
+				"combat",
+				"systems\\combat.js"
+			],
+			[
+				"weapon",
+				"public\\gamedata\\weapons.json"
+			],
+			[
+				"interactionAn",
+				"public\\js\\systems\\interactionAnimation.js"
+			],
+			[
+				"rangedHorde",
+				"gamedata\\enemyFormations\\rangedHorde.json"
+			],
+			[
+				"meleeHorde",
+				"gamedata\\enemyFormations\\meleeHorde.json"
+			],
+			[
+				"weaponAnim",
+				"public\\js\\systems\\weaponAnimation.js"
+			],
+			[
+				"movementCOntrols",
+				"public\\js\\systems\\movementControls.js"
+			],
+			[
+				"movementCOn",
+				"public\\js\\components\\movementControls.js"
+			],
+			[
+				"health",
+				"public\\js\\systems\\health.js"
+			],
+			[
+				"lever",
+				"public\\assets\\models\\lever.json"
+			],
+			[
+				"syringe.json",
+				"public\\assets\\models\\syringe.json"
+			],
+			[
+				"hex",
+				"gamedata\\enemyFormations\\hexFormation.json"
+			],
+			[
+				"interactable",
+				"systems\\interactable.js"
+			],
+			[
+				"textbox",
+				"public\\js\\systems\\textbox.js"
+			],
+			[
+				"weapon.js",
+				"components\\weapon.js"
+			],
+			[
+				"loadEne",
+				"systems\\loadEnemies.js"
+			],
+			[
+				"velocity",
+				"public\\js\\systems\\velocity.js"
+			],
+			[
+				"range",
+				"gamedata\\enemyFormations\\rangedHorde.json"
+			],
+			[
+				"meleeh",
+				"gamedata\\enemyFormations\\meleeHorde.json"
+			],
+			[
+				"movement",
+				"public\\js\\components\\movement.js"
+			],
+			[
+				"movementContor",
+				"public\\js\\components\\movementControls.js"
+			],
+			[
+				"movementControls",
+				"public\\js\\systems\\movementControls.js"
+			],
+			[
+				"entitySpawning",
+				"public\\js\\systems\\entitySpawning.js"
+			],
+			[
+				"combat.js",
+				"systems\\combat.js"
+			],
+			[
+				"movementUPd",
+				"public\\js\\systems\\movementUpdate.js"
+			],
+			[
+				"horde",
+				"gamedata\\enemyFormations\\meleeHorde.json"
+			],
+			[
+				"hexF\t",
+				"gamedata\\enemyFormations\\hexFormation.json"
+			],
+			[
+				"hitbox",
+				"public\\js\\systems\\hitbox.js"
+			],
+			[
+				"movementConr",
+				"public\\js\\systems\\movementControls.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"hexFor",
+				"gamedata\\enemyFormations\\hexFormation.json"
+			],
+			[
+				"animation",
+				"public\\js\\systems\\animation.js"
+			],
+			[
+				"interactionA",
+				"public\\js\\systems\\interactionAnimation.js"
+			],
+			[
+				"prope",
+				"public\\gamedata\\propText.json"
+			],
+			[
+				"ranged",
+				"gamedata\\enemyFormations\\rangedHorde.json"
+			],
+			[
+				"movementCont",
+				"public\\js\\systems\\movementControls.js"
+			],
+			[
+				"hit",
+				"public\\js\\systems\\hitbox.js"
+			],
+			[
+				"syrin",
+				"public\\assets\\models\\syringe.json"
+			],
+			[
+				"interac",
+				"systems\\interactable.js"
+			],
+			[
+				"interacta",
+				"systems\\interactable.js"
 			],
 			[
 				"movePal",
@@ -1100,28 +816,12 @@
 				"systems\\loadPlayer.js"
 			],
 			[
-				"loadEnemies",
-				"systems\\loadEnemies.js"
-			],
-			[
 				"entitySpawi",
 				"public\\js\\systems\\entitySpawning.js"
 			],
 			[
-				"textbox",
-				"public\\js\\components\\textbox.js"
-			],
-			[
 				"cameraControls",
 				"public\\js\\components\\cameraControls.js"
-			],
-			[
-				"props",
-				"gamedata\\props.json"
-			],
-			[
-				"animation",
-				"public\\js\\systems\\animation.js"
 			],
 			[
 				"hexo",
@@ -1132,64 +832,24 @@
 				"gamedata\\enemyFormations\\meleeHorde.json"
 			],
 			[
-				"weapon",
-				"components\\weapon.js"
-			],
-			[
-				"weaponAnim",
-				"public\\js\\systems\\weaponAnimation.js"
-			],
-			[
-				"combat",
-				"components\\combat.js"
-			],
-			[
 				"enemy",
 				"gamedata\\enemyFormations\\enemy.json"
-			],
-			[
-				"horde",
-				"gamedata\\bad\\meleeHorde.json"
 			],
 			[
 				"meleeH",
 				"gamedata\\enemyFormations\\meleeHorde.json"
 			],
 			[
-				"hex",
-				"gamedata\\enemyFormations\\hexFormation.json"
-			],
-			[
-				"combat.js",
-				"systems\\combat.js"
-			],
-			[
-				"attackMele",
-				"systems\\attackMelee.js"
-			],
-			[
 				"weaponContro",
 				"public\\js\\systems\\weaponControls.js"
-			],
-			[
-				"lever",
-				"public\\assets\\models\\lever.json"
 			],
 			[
 				"interact",
 				"systems\\interactable.js"
 			],
 			[
-				"health",
-				"public\\js\\components\\health.js"
-			],
-			[
 				"entitySpa",
 				"public\\js\\systems\\entitySpawning.js"
-			],
-			[
-				"health.js",
-				"public\\js\\systems\\health.js"
 			],
 			[
 				"loginPlayer",
@@ -1204,16 +864,8 @@
 				"public\\js\\loadECS.js"
 			],
 			[
-				"ai",
-				"components\\ai.js"
-			],
-			[
 				"co",
 				"components\\combat.js"
-			],
-			[
-				"weaponCon",
-				"public\\js\\systems\\weaponControls.js"
 			],
 			[
 				"entiti\t",
@@ -1232,10 +884,6 @@
 				"public\\js\\systems\\weaponAnimation.js"
 			],
 			[
-				"movementControls",
-				"public\\js\\systems\\movementControls.js"
-			],
-			[
 				"weaponContr",
 				"public\\js\\systems\\weaponControls.js"
 			],
@@ -1244,20 +892,8 @@
 				"public\\js\\systems\\movementUpdate.js"
 			],
 			[
-				"weapon.js",
-				"components\\weapon.js"
-			],
-			[
 				"envronme",
 				"components\\environment.js"
-			],
-			[
-				"attackRanged",
-				"systems\\attackRanged.js"
-			],
-			[
-				"collision",
-				"systems\\collision.js"
 			],
 			[
 				"client",
@@ -1320,10 +956,6 @@
 				"public\\js\\systems\\weaponControls.js"
 			],
 			[
-				"loadEne",
-				"systems\\loadEnemies.js"
-			],
-			[
 				"client.js",
 				"components\\client.js"
 			],
@@ -1364,10 +996,6 @@
 				"public\\js\\components\\movementControls.js"
 			],
 			[
-				"movement",
-				"public\\js\\components\\movement.js"
-			],
-			[
 				"movementAn",
 				"public\\js\\systems\\movementAnimation.js"
 			],
@@ -1404,10 +1032,6 @@
 				"public\\js\\systems\\collidable.js"
 			],
 			[
-				"loadModel",
-				"systems\\loadModels.js"
-			],
-			[
 				"hitbox.js",
 				"public\\js\\systems\\hitbox.js"
 			],
@@ -1420,16 +1044,8 @@
 				"public\\assets\\models\\player.json"
 			],
 			[
-				"velocity",
-				"public\\js\\components\\velocity.js"
-			],
-			[
 				"modelName",
 				"public\\js\\components\\modelName.js"
-			],
-			[
-				"hitbox",
-				"public\\js\\systems\\hitbox.js"
 			],
 			[
 				"velocityParameters",

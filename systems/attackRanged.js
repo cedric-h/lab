@@ -18,7 +18,7 @@ var arrowOrigins = undefined;
 
 
 //helper functions
-function rangedAttack(attackerEntity, targetPos)
+function rangedAttack(attackerEntity, attackData)
 {
     //attacker components
     let attackerModel     = entities.getComponent(attackerEntity, "model");
@@ -27,6 +27,11 @@ function rangedAttack(attackerEntity, targetPos)
     let combat            = entities.getComponent(attackerEntity, "combat");
     //target components
     let targetModel = entities.getComponent(combat.target, "model");
+
+    let targetPos = attackData.targetPos;
+
+    //grab the attack data
+    let attack = entities.getComponent(attackerEntity, "weapon").attacks[attackData.attackIndex];
 
     //modify where the arrow will go with some juicy randomness
     if(targetPos === undefined)
@@ -56,13 +61,11 @@ function rangedAttack(attackerEntity, targetPos)
         targetPos: targetPos.toArray()
     });
 
-    let targetAtTimeOfFiring = combat.target;
-
     //wait a bit, then fire the arrow
     setTimeout(
         () =>
         {
-            if(!combat.readied)
+            if(!combat.readied || entities.find('model').indexOf(attackerEntity) === -1)
                 return;
 
             //get the arrow set up
@@ -78,8 +81,9 @@ function rangedAttack(attackerEntity, targetPos)
             let velocityParameters = entities.getComponent(arrowEntity, "velocityParameters");
             let collision          = entities.getComponent(arrowEntity, "collision");
 
-            //record collision target
-            collision.target = targetAtTimeOfFiring;
+            //who the bullets can hurt...
+            //the following line hacky and bad and stupid and I should feel hacky and bad and stupid
+            collision.targetType = attackerModelName === "player" ? "ai" : "client";
             
             //stick the arrow in their gun
             arrowModel.position.fromArray(arrowOrigins[attackerModelName]);
@@ -123,7 +127,7 @@ function rangedAttack(attackerEntity, targetPos)
             });
 
             //do damage once the arrow is removed.
-            collision.emitter.on('hit', function dealDamage(hitType)
+            collision.emitter.on('hit', function dealDamage(hitType, hitEntity)
             {
                 entities.removeComponent(arrowEntity, "collision");
 
@@ -131,12 +135,17 @@ function rangedAttack(attackerEntity, targetPos)
                     setImmediate(() =>
                     {
                         //in case the target died while the arrow was flying.
-                        if(entities.find('health').indexOf(targetAtTimeOfFiring) !== -1)
+                        if(entities.find('health').indexOf(hitEntity) !== -1)
                         {
-                            let health = entities.getComponent(targetAtTimeOfFiring, 'health');
-
+                            //health reduction
+                            let health = entities.getComponent(hitEntity, 'health');
                             if(health)
-                                health.val -= 1;
+                                health.val -= attack.damage;
+
+                            //speed reduction
+                            let ai = entities.getComponent(hitEntity, 'ai');
+                            if(ai && (attack.slowSpeedBy !== undefined))
+                                ai.speed *= attack.slowSpeedBy;
                         }
 
                         entities.destroy(arrowEntity);
@@ -160,8 +169,20 @@ entities.emitter.on('combatCreate', entity =>
     let combat = entities.getComponent(entity, "combat");
 
 
-    const launchRangedAttack = targetPos =>
-        rangedAttack(entity, targetPos);
+    const launchRangedAttack = attackData =>
+    {
+        let attack = entities.getComponent(entity, "weapon").attacks[attackData.attackIndex];
+
+        for(let i = 0; i < (attack.shotsFired || 1); i++)
+            setTimeout(
+                () =>
+                {
+                    if(entities.find('model').indexOf(combat.target) !== -1)
+                        rangedAttack(entity, attackData);
+                },
+                Math.random() * 175
+            );
+    }
 
     combat.emitter.on('launchRangedAttack', launchRangedAttack);
 

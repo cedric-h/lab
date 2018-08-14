@@ -38,13 +38,19 @@ define(['../lib/three.js'], THREE =>
 					);
 
 					direction = new THREE.Quaternion().setFromEuler(euler);
+
+					//console.log('setting direction and euler');
 				}
 
 				if(!model.quaternion.equals(direction))
 				{
-					//increasing this beforehand just because it could get set to zero up ahead,
-					//and I don't want the animation to get a headstart of one frame... insane, ik.
-					movement.rotationAnimProg += delta;
+					//console.log('lerping');
+
+					//I want rotation that happens because of the camera pointing somewhere else
+					//to feel smoother, so it doesn't get a head start like directionOverride
+					//(the rotationAnimProg could get set to 0 in the next clause)
+					if(!movement.directionOverride)
+						movement.rotationAnimProg += delta;
 
 					//if we're trying to rotate to a different place now
 					if(!direction.equals(movement.goalDirection))
@@ -58,6 +64,11 @@ define(['../lib/three.js'], THREE =>
 						movement.startDirection	 = model.quaternion.clone();
 						movement.goalDirection	 = direction.clone();
 					}
+
+					//animation that happens because of direction override should be snappier,
+					//so it gets a head start even when it was just set to 0
+					if(movement.directionOverride)
+						movement.rotationAnimProg += delta;
 
 					//interpolate
 					let progress = (movement.rotationAnimProg/movement.rotationAnimTime);

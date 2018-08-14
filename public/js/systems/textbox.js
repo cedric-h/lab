@@ -8,7 +8,7 @@ define(['../lib/three.js'], function(THREE)
 	textGeometry.translate(0, 0, 3.75);
 	const textMaterial = new THREE.MeshBasicMaterial({
 		side: 			THREE.DoubleSide,
-		opacity: 		0.75,
+		opacity: 		0.9,
 		transparent: 	true,
 	});
 	//external files
@@ -122,6 +122,9 @@ define(['../lib/three.js'], function(THREE)
 			{
 				let playerModel = entities.getComponent(localPlayerEntity, "model");
 				let shouldZoom = false;
+				let hideAll = false;
+
+				hideAll = !(entities.find('targetable').length === 0);
 
 				entities.find('textbox').forEach(entity =>
 				{
@@ -131,7 +134,7 @@ define(['../lib/three.js'], function(THREE)
 
 					let distance = playerModel.position.distanceTo(model.position);
 
-					if(distance < textbox.appearDistance)
+					if(distance < textbox.appearDistance && !hideAll)
 					{
 						textPlane.visible = true;
 

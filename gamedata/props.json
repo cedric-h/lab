@@ -31,7 +31,7 @@
 		},
 
 		"interactable": {
-			"interactionDistance": 2.25
+			"interactionDistance": 3.5
 		}
 
 	},
@@ -52,16 +52,16 @@
 				"position": [-16, 11, 0],
 
 				"text": {
-					"title": "controls book",
-					"body":  "Hey!"
-				}
+					"title": "plans book",
+					"body":  "More content, in the form of rooms, weapons, enemies, and more, is in the works. The next big update should be around the start of the new year. Then we'll put the game up online, so that we can all play together :D"
+				}																																									
 			},
 			{
 				"position": [-16, -17.5, 0],
 
 				"text": {
 					"title": "credits book",
-					"bdoy":  "Cedric Hutchings."
+					"body":  "Programming: Cedric Hutchings \n Music: Udbhav S. \n Art: Jack Deverin / 3Dshed / quaternius \n *all existing models are likely placeholders. Jack Deverin is no longer working with us."
 				}
 			}
 		]
