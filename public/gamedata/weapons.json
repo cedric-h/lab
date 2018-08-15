@@ -41,7 +41,7 @@
 				"type":			"single",
 
 				"damage":		1,
-				"slowSpeedBy":	0.2,
+				"slowSpeedBy":	0.5,
 				"cooldown":		15000
 			}
 		]

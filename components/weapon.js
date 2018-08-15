@@ -15,6 +15,13 @@
 				name: 	undefined,
 				model: 	undefined,
 			}
+		},
+		reset: weapon =>
+		{
+			weapon = {
+				name:  undefined,
+				model: undefined
+			}
 		}
 	}
 

@@ -23,6 +23,7 @@ define(['../lib/three.js', '../util/closestEntity.js'], function(THREE, closestE
 		window.addEventListener('keydown', event =>
 		{
 			let keyIndex = parseInt(event.key) - 1;
+			console.log(weapon.attacks[keyIndex]);
 
 			if(weapon.attacks.hasOwnProperty(keyIndex))
 			{

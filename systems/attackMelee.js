@@ -40,7 +40,7 @@ function shouldAttack(attackerEntity)
         let weapon        = entities.getComponent(attackerEntity, "weapon");
         let attackerModel = entities.getComponent(attackerEntity, "model");
 
-        if(entities.find('model').indexOf(combat.target) !== -1)
+        if(combat && entities.find('model').indexOf(combat.target) !== -1)
         {
             //target components
             let targetModel = entities.getComponent(combat.target, "model");

@@ -42,7 +42,7 @@ define(['../lib/three.js'], function(THREE)
 	{
 		let weapon = entities.getComponent(entity, "weapon");
 
-		Object.assign(weapon, weaponStats[weapon.name]);
+		Object.assign(weapon, JSON.parse(JSON.stringify(weaponStats[weapon.name])));
 
 
 		//let the weapon get assigned

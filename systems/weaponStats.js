@@ -19,11 +19,11 @@ entities.emitter.on('weaponEquip', entity =>
 	let weapon = entities.getComponent(entity, "weapon");
 
 	if(weaponStats !== undefined)
-		Object.assign(weapon, weaponStats[weapon.name]);
+		Object.assign(weapon, JSON.parse(JSON.stringify(weaponStats[weapon.name])));
 
 	else
 		loadingEmitter.once('loaded', () =>
-			Object.assign(weapon, weaponStats[weapon.name])
+			Object.assign(weapon, JSON.parse(JSON.stringify(weaponStats[weapon.name])))
 		);
 });
 

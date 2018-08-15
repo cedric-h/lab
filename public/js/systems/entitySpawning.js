@@ -94,17 +94,17 @@ define(['../lib/three.js'], function(THREE)
 
             server.emit('localIdReceived');
         });
-    });
 
-    //handle things joining and leaving.
-    server.on('entitySpawn',   message  => spawn(message));
+        //handle things joining and leaving.
+        server.on('entitySpawn',   message  => spawn(message));
 
-    //yeah, fine, leave, whatever. not like I wanted you here anyway. ;o;
-    server.on('entityDespawn', serverId => 
-    {
-        let entity = entityWithId(serverId);
-        if(entity)
-            entities.destroy(entity);
+        //yeah, fine, leave, whatever. not like I wanted you here anyway. ;o;
+        server.on('entityDespawn', serverId => 
+        {
+            let entity = entityWithId(serverId);
+            if(entity)
+                entities.destroy(entity);
+        });
     });
 
 
